@@ -26,7 +26,8 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <cstdio>
 #include <string>
 #include <stack>
-
+#include <string.h>
+#include "../Utilities/offer.h"
 using namespace std;
 
 bool hasPathCore(const char* matrix, int rows, int cols, int row, int col, const char* str, int& pathLength, bool* visited);
