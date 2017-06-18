@@ -33,8 +33,7 @@ int movingCount(int threshold, int rows, int cols)
     for(int i = 0; i < rows * cols; ++i)
         visited[i] = false;
 
-    int count = movingCountCore(threshold, rows, cols,
-        0, 0, visited);
+    int count = movingCountCore(threshold, rows, cols, 0, 0, visited);
 
     delete[] visited;
 

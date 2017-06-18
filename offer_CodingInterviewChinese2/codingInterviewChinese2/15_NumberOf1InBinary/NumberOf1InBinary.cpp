@@ -33,6 +33,7 @@ int NumberOf1_Solution1(int n)
     return count;
 }
 
+// hard to get
 int NumberOf1_Solution2(int n)
 {
     int count = 0;
