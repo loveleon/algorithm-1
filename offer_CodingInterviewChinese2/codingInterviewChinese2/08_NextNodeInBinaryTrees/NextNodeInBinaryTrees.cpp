@@ -56,6 +56,40 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
     return pNext;
 }
 
+// DIY
+BinaryTreeNode* GetNext2(BinaryTreeNode *pNode)
+{
+    BinaryTreeNode* tmp  = NULL;
+    BinaryTreeNode* tmp1 = NULL; 
+
+    if (pNode->m_pRight)
+    {
+        tmp = pNode->m_pRight;
+
+        while (tmp->m_pLeft)
+        {
+            tmp = tmp->m_pLeft;
+        }
+
+        return tmp;
+    }
+    else
+    {
+        tmp1 = pNode;
+
+        while (tmp1->m_pParent)
+        {
+            if (tmp1->m_pParent->m_pLeft == tmp1)
+            {
+                return tmp1->m_pParent;
+            }
+            tmp1 = tmp1->m_pParent;        
+        }
+
+        return NULL;
+    }
+}
+
 // ==================== 辅助代码用来构建二叉树 ====================
 BinaryTreeNode* CreateBinaryTreeNode(int value)
 {
