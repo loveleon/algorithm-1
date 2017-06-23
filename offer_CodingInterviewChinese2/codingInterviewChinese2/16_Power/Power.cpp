@@ -44,6 +44,7 @@ double Power(double base, int exponent)
     return result;
 }
 
+// the Common Method
 /*
 double PowerWithUnsignedExponent(double base, unsigned int exponent)
 {
@@ -55,7 +56,7 @@ double PowerWithUnsignedExponent(double base, unsigned int exponent)
     return result;
 }
 */
-
+// the overall and efficient way 
 double PowerWithUnsignedExponent(double base, unsigned int exponent)
 {
     if (exponent == 0)

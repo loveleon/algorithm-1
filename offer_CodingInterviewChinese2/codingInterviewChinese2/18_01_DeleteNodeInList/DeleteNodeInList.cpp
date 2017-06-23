@@ -41,7 +41,7 @@ void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
         pToBeDeleted = nullptr;
         *pListHead = nullptr;
     }
-    // 链表中有多个结点，删除尾结点
+    // 链表中有多个结点，删除尾结点 the trap
     else
     {
         ListNode* pNode = *pListHead;
