@@ -61,7 +61,7 @@ void Print1(BinaryTreeNode* pRoot)
 void Print2(BinaryTreeNode* pRoot)
 {
 	BinaryTreeNode *tmp = NULL;
-	std::queue<BinaryTreeNode *> btree_que;
+	std::queue<BinaryTreeNode*> btree_que;
 	int ref_count = 1;
 	int next_level = 0;
 	

@@ -18,10 +18,11 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 其他行以此类推。
 
 #include <cstdio>
-#include "..\Utilities\BinaryTree.h"
+#include "../Utilities/BinaryTree.h"
+#include "../Utilities/offer.h"
 #include <stack>
 
-void Print(BinaryTreeNode* pRoot)
+void Print1(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
         return;
@@ -61,6 +62,65 @@ void Print(BinaryTreeNode* pRoot)
         }
     }
 }
+
+void Print2(BinaryTreeNode* pRoot)
+{
+	BinaryTreeNode *node = NULL;
+	std::stack<BinaryTreeNode*> btree_stack[2];
+	int current = 0;
+	int next = 1;
+	int tmp = 0;
+
+	if (pRoot == NULL) 
+		return;
+
+	btree_stack[current].push(pRoot);
+	while (!btree_stack[current].empty() || !btree_stack[next].empty())
+	{
+		node = btree_stack[current].top();
+		printf("%d ", node->m_nValue);
+		btree_stack[current].pop();
+
+		if (current == 0)
+		{
+			if (node->m_pLeft)
+			{
+				btree_stack[next].push(node->m_pLeft);
+			}
+
+			if (node->m_pRight)
+			{
+				btree_stack[next].push(node->m_pRight);
+			}
+		}
+		else
+		{
+			if (node->m_pRight)
+			{
+				btree_stack[next].push(node->m_pRight);
+			}
+
+			if (node->m_pLeft)
+			{
+				btree_stack[next].push(node->m_pLeft);
+			}
+		}
+
+		if (btree_stack[current].empty())// ref_count == 0
+		{
+			printf("\n");
+			tmp = current;
+			current = next;
+			next = tmp;
+		}
+	}
+}
+
+void Print(BinaryTreeNode* pRoot)
+{
+	return Print2(pRoot);
+}
+
 
 // ====================测试代码====================
 //            8
@@ -248,12 +308,13 @@ void Test7()
 int main(int argc, char* argv[])
 {
     Test1();
+#if 1
     Test2();
     Test3();
     Test4();
     Test5();
     Test6();
     Test7();
-
+#endif
     return 0;
 }
