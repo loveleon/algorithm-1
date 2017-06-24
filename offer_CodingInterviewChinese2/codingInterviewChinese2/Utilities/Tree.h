@@ -14,6 +14,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 
 #pragma once
 
+#ifndef __TREE_H__
+#define __TREE_H__
+
 #include <vector>
 
 struct TreeNode 
@@ -27,3 +30,5 @@ __declspec( dllexport ) void ConnectTreeNodes(TreeNode* pParent, TreeNode* pChil
 __declspec( dllexport ) void PrintTreeNode(const TreeNode* pNode);
 __declspec( dllexport ) void PrintTree(const TreeNode* pRoot);
 __declspec( dllexport ) void DestroyTree(TreeNode* pRoot);
+
+#endif

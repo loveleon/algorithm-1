@@ -12,6 +12,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 作者：何海涛
 //==================================================================
 
+#ifndef __BINARYTREE_H__
+#define __BINARYTREE_H__
+
 #pragma once
 #include "offer.h"
 
@@ -100,4 +103,4 @@ void DestroyTree(BinaryTreeNode* pRoot)
     }
 }
 
-
+#endif
