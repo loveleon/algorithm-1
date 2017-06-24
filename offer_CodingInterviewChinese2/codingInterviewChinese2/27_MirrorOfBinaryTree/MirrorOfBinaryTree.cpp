@@ -16,12 +16,13 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 题目：请完成一个函数，输入一个二叉树，该函数输出它的镜像。
 
 #include <cstdio>
-#include "..\Utilities\BinaryTree.h"
+#include "../Utilities/BinaryTree.h"
+#include "../Utilities/offer.h"
 #include <stack>
 
 void MirrorRecursively(BinaryTreeNode *pNode)
 {
-    if((pNode == nullptr) || (pNode->m_pLeft == nullptr && pNode->m_pRight))
+    if((pNode == nullptr) || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
         return;
 
     BinaryTreeNode *pTemp = pNode->m_pLeft;
