@@ -17,10 +17,11 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 打印到一行。
 
 #include <cstdio>
-#include "..\Utilities\BinaryTree.h"
+#include "../Utilities/BinaryTree.h"
+#include "../Utilities/offer.h"
 #include <queue>
 
-void Print(BinaryTreeNode* pRoot)
+void Print1(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
         return;
@@ -54,6 +55,53 @@ void Print(BinaryTreeNode* pRoot)
             nextLevel = 0;
         }
     }
+}
+
+// my code
+void Print2(BinaryTreeNode* pRoot)
+{
+	BinaryTreeNode *tmp = NULL;
+	std::queue<BinaryTreeNode *> btree_que;
+	int ref_count = 1;
+	int next_level = 0;
+	
+	if (pRoot == NULL)
+	{
+		return;
+	}
+
+	btree_que.push(pRoot);
+	while (btree_que.size())
+	{
+		tmp = btree_que.front();
+		printf("%d ", tmp->m_nValue);
+
+		if (tmp->m_pLeft)
+		{
+			btree_que.push(tmp->m_pLeft);
+			++next_level;
+		}
+
+		if (tmp->m_pRight)
+		{
+			btree_que.push(tmp->m_pRight);
+			++next_level;
+		}
+
+		btree_que.pop();
+		--ref_count;
+		if (ref_count == 0)
+		{
+			printf("\n");
+			ref_count = next_level;
+			next_level = 0;
+		}
+	}
+}
+
+void Print(BinaryTreeNode* pRoot)
+{
+	return Print2(pRoot);
 }
 
 // ====================测试代码====================
