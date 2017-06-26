@@ -17,9 +17,10 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 如果是则返回true，否则返回false。假设输入的数组的任意两个数字都互不相同。
 
 #include <cstdio>
+#include "../Utilities/offer.h"
 
 // BST：Binary Search Tree，二叉搜索树
-bool VerifySquenceOfBST(int sequence[], int length)
+bool VerifySquenceOfBST1(int sequence[], int length)
 {
     if(sequence == nullptr || length <= 0)
         return false;
@@ -45,14 +46,65 @@ bool VerifySquenceOfBST(int sequence[], int length)
     // 判断左子树是不是二叉搜索树
     bool left = true;
     if(i > 0)
-        left = VerifySquenceOfBST(sequence, i);
+        left = VerifySquenceOfBST1(sequence, i);
 
     // 判断右子树是不是二叉搜索树
     bool right = true;
     if(i < length - 1)
-        right = VerifySquenceOfBST(sequence + i, length - i - 1);
+        right = VerifySquenceOfBST1(sequence + i, length - i - 1);
 
     return (left && right);
+}
+
+// my code
+bool be_post(int arr[], int length)
+{
+	int i = 0;
+	int mid = 0;
+
+	if (arr == NULL)
+		return false;
+
+	if (length == 1 || length == 0)// the two  choice: or judge pre the func
+		return true;
+	
+	int root = arr[length - 1];
+	
+	for (i = 0; i < length; i++)
+	{
+		if (arr[i] > root)
+		{
+			mid = i;
+			break;
+		}
+
+		mid = i; // the past bugfix 
+	}
+
+	i = mid;
+	for (i; i < length - 1; i++)
+	{
+		if (arr[i] <= root)
+		{
+			return false;
+		}
+	}
+
+	bool left = true;
+	//if (mid > 0) // the past bugfix
+		left = be_post(arr, mid);		
+
+	bool right = true;
+	//if (mid < length - 1)// the past bugfix
+		right = be_post(arr + mid, length - mid - 1);	
+
+	return (left && right);
+}
+
+
+bool VerifySquenceOfBST(int sequence[], int length)
+{
+	return be_post(sequence, length);
 }
 
 // ====================测试代码====================
