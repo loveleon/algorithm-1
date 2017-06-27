@@ -56,7 +56,8 @@ bool VerifySquenceOfBST1(int sequence[], int length)
     return (left && right);
 }
 
-// my code
+// my code: the damn onsite in 2017.6.30 on the 2nd round of AI&R in MS, 
+// a long long ..way to go
 bool be_post(int arr[], int length)
 {
 	int i = 0;
@@ -100,7 +101,6 @@ bool be_post(int arr[], int length)
 
 	return (left && right);
 }
-
 
 bool VerifySquenceOfBST(int sequence[], int length)
 {

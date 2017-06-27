@@ -16,6 +16,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #define __BINARYTREE_H__
 
 #pragma once
+#include <stdio.h>
 #include "offer.h"
 
 struct BinaryTreeNode 
