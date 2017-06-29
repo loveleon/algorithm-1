@@ -69,7 +69,7 @@ void post_to_in(int arr[], int length)
 	int cur = 0;
 	int tmp = 0;
 
-	if (length == 1 || length == 0 || arr == NULL)
+	if (length == 1 || length == 0 || arr == NULL) //the edge and exception
 	{
 		return;
 	}
