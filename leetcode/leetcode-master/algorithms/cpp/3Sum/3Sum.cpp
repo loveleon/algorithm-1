@@ -9,7 +9,7 @@
 * 
 * Note:
 * 
-* Elements in a triplet (a,b,c) must be in non-descending order. (ie, a ≤ b ≤ c)
+* Elements in a triplet (a,b,c) must be in non-descending order. (ie, a <= b <= c)
 * The solution set must not contain duplicate triplets.
 * 
 *     For example, given array S = {-1 0 1 2 -1 -4},
@@ -126,9 +126,9 @@ vector<vector<int> > combination(vector<int> &v, int k) {
         d.push_back( (i<k) ? 1 : 0 );
     }
 
-    //1) from the left, find the [1,0] pattern, change it to [0,1]
-    //2) move all of the 1 before the pattern to the most left side
-    //3) check all of 1 move to the right
+    // 1) from the left, find the [1,0] pattern, change it to [0,1]
+    // 2) move all of the 1 before the pattern to the most left side
+    // 3) check all of 1 move to the right
     while(1){
         vector<int> tmp;
         for(int x=0; x<n; x++){
@@ -178,8 +178,8 @@ void printMatrix(vector<vector<int> > &matrix)
 
 int main()
 {
-    //int a[] = {-1, 0, 1, 2, -1, 1, -4};
-    int a[] = {-1, 1, 1, 1, -1, -1, 0,0,0};
+    int a[] = {-1, 0, 1, 2, -1, 1, -4};
+    //int a[] = {-1, 1, 1, 1, -1, -1, 0,0,0};
     vector<int> n(a, a+sizeof(a)/sizeof(int));
     vector< vector<int> > result = threeSum(n);
     printMatrix(result);    
