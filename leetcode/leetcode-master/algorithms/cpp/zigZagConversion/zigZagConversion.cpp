@@ -27,6 +27,7 @@
 #include <string>
 using namespace std;
 
+#if 0
 string convert(string s, int nRows) {
     //The cases no need to do anything
     if (nRows<=1 || nRows>=s.size()) return s;
@@ -48,6 +49,37 @@ string convert(string s, int nRows) {
     }
     return result;
 }
+#endif
+
+#if 1
+string convert(string s, int nRows)
+{
+	int i = 0;
+	int step = 0;
+	int row_index = 0;
+	vector<string> row(nRows);
+	string res;
+
+	if (nRows <= 1 || nRows >= s.size())
+		return s;
+	
+	for (i = 0; i < s.size(); i++)
+	{
+		if (row_index == nRows - 1) step = -1;
+		if (row_index == 0) step = 1;
+
+		row[row_index] += s[i];
+		row_index += step;
+	}
+
+	for (i = 0; i < nRows; i++)
+	{
+		res += row[i];
+	}
+
+	return res;
+}
+#endif
 
 int main(int argc, char**argv){
 
@@ -59,3 +91,4 @@ int main(int argc, char**argv){
     cout << s << " : " << convert(s, 3) << endl;
 
 }
+
