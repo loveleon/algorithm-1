@@ -33,6 +33,7 @@
 //  http://stackoverflow.com/questions/14695118/2147483648-0-returns-true-in-c
 #define INT_MAX     2147483647
 #define INT_MIN     (-INT_MAX - 1)
+#if 0
 int reverse(int x) {
     int y=0;
     int n;
@@ -48,6 +49,31 @@ int reverse(int x) {
     }
     return y;
 }
+#else
+int reverse(int o)
+{
+    int a[10];
+    int flag;
+
+	int r = 0;
+	int t = 0;
+
+	while (o != 0)
+	{
+		t = o % 10;
+
+		if ((r < (INT_MIN / 10)) || (r > (INT_MAX / 10))) //
+		{
+			return 0;
+		}
+
+		r = r * 10 + t;
+		o = o / 10;
+	}
+	
+	return r;
+}
+#endif
 
 #define TEST(n, e)  printf("%12d  =>  %-12d    %s!\n",  n, reverse(n),  e == reverse(n)?"passed":"failed")
 
