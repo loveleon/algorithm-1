@@ -40,7 +40,7 @@
 
 #define INT_MIN     (-2147483647 - 1)
 #define INT_MAX      2147483647
-
+#if 0
 int atoi(const char *str) {
     if (str==NULL || *str=='\0'){
         return 0;
@@ -73,7 +73,41 @@ int atoi(const char *str) {
     
     return neg?-ret:ret;
 }
+#else
+int atoi(const char *str)
+{
+	int res = 0;
+	bool neg = false;
 
+    if (str==NULL || *str=='\0') return 0;
+    
+	for (; isspace(*str); str++);
+	
+	if (*str == '-') 
+	{
+		neg = true;
+		str++;
+	}
+
+	if (*str == '+') 
+	{
+		str++;
+	}
+
+	for (; isdigit(*str); str++)
+	{
+		int num = *str - '0';
+
+		if (neg && -res < ((INT_MIN + num) / 10)) return INT_MIN;
+
+		if (!neg && res > (INT_MAX - num) / 10) return INT_MAX;
+
+		res = res * 10 + num;
+	}
+
+	return neg? -res : res;
+}
+#endif
 
 int main()
 {
@@ -87,5 +121,8 @@ int main()
     printf("\"%s\" = %d\n", "-2147483648", atoi("-2147483648"));
     printf("\"%s\" = %d\n", "2147483648", atoi("2147483648"));
     printf("\"%s\" = %d\n", "-2147483649", atoi("-2147483649"));
+    
+    printf("\"%s\" = %d\n", "2147483649", atoi("2147483649"));
+    printf("\"%s\" = %d\n", "2147483650", atoi("2147483650"));
     return 0;
 }
