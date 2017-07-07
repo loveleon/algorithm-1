@@ -27,6 +27,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+#if 0
 class Solution {
 public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
@@ -52,3 +54,37 @@ public:
         return head->next;
     }
 };
+
+#else
+ListNode *removeNthFromEnd(ListNode *head, int n)
+{
+	ListNode *ahead = NULL;
+	ListNode *behind = NULL;	
+	int i = 0;
+
+	if (head == NULL || n == 0)
+		return NULL;
+
+	ahead = head;
+	for (i = 0; i < n; i++)
+	{
+		if (ahead == NULL)
+			return NULL;
+		ahead = ahead->next;
+	}
+
+	behind = head;
+	while (ahead->next != NULL)
+	{
+		ahead  = ahead->next;
+		behind = behind->next;
+	}
+
+	ListNode *tmp = NULL;
+	tmp = behind->next;
+	behind->next = tmp->next;
+	delete behind->next;
+
+}
+
+#endif
