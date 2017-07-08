@@ -14,7 +14,7 @@
 #include <vector>
 using namespace std;
 
-
+#if 0
 string longestCommonPrefix(vector<string> &strs) {
     string word;
     if (strs.size()<=0) return word;
@@ -42,3 +42,21 @@ int main()
     vector<string> v(s, s+3);
     cout << longestCommonPrefix(v) <<endl;
 }
+
+#else
+
+string longestCommonPrefix(const char** strs, int strs_num)
+{
+	
+
+
+}
+
+int main()
+{
+    const char* s[]={"abab","aba","abc"};
+    
+    cout << longestCommonPrefix(s, 3) <<endl;
+}
+#endif
+

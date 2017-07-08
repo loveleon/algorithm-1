@@ -66,13 +66,14 @@ public:
         
         while (l1!=NULL && l2!=NULL ){
             ListNode *n=NULL;
-            if (l1->val < l2-> val){
+            if (l1->val < l2->val){
                 n = l1;
                 l1=l1->next;
             }else{
                 n = l2;
                 l2=l2->next;
             }
+
             if (l==NULL){
                 l = p = n;
             }else{
