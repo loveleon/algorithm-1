@@ -16,7 +16,7 @@
 * 
 *               
 **********************************************************************************/
-
+#if 0
 class Solution {
 public:
     int removeDuplicates(int A[], int n) {
@@ -32,3 +32,24 @@ public:
         return pos+1;
     }
 };
+
+#else
+
+int removeDuplicates(int A[], int n)
+{
+	int i = 0;
+	int j = 0;
+
+	for (i = 0; i < n - 1; i++)
+	{
+		if (A[i] != A[i + 1])
+		{
+			j++;
+			A[j] = A[i + 1];
+		}
+	}
+
+	return j + 1; 
+}
+
+#endif
