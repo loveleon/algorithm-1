@@ -10,7 +10,7 @@
 * 
 *               
 **********************************************************************************/
-
+#if 0
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
@@ -37,3 +37,25 @@ public:
         return tail+1;
     }
 };
+
+#else
+
+int removeElement(int A[], int n, int elem)
+{
+	int i = 0;
+	int j = 0;
+
+	for (i = 0; i < n; i++)
+	{
+		if (A[i] != elem)
+		{	
+			A[j] = A[i];
+			j++;
+		}
+	}
+
+	return j;
+
+}
+
+#endif
