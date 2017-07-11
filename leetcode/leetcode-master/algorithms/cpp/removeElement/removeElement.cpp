@@ -55,7 +55,6 @@ int removeElement(int A[], int n, int elem)
 	}
 
 	return j;
-
 }
 
 #endif

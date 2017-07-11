@@ -19,12 +19,18 @@ char *strStr1(char *haystack, char *needle);
 char *strStr2(char *haystack, char *needle);
 
 char *strStr(char*haystack, char *needle) {
+#if 0
     if (random()%2){
         printf("---KMP---\n");
         return strStr1(haystack, needle);
     }
     printf("---brute-force---\n");
     return strStr2(haystack, needle);
+#else
+
+
+#endif
+
 }
 //KMP
 char *strStr1(char *haystack, char *needle) {
@@ -49,7 +55,8 @@ char *strStr1(char *haystack, char *needle) {
         char *p=haystack;
         int n=0;
         while(*q && *p && *p==*q){
-            p++; q++;
+            p++;
+            q++;
             if (n==0 && *p == *needle){
                 n = p - haystack;
             }
@@ -95,6 +102,7 @@ char *strStr2(char *haystack, char *needle) {
 
     return NULL;
 }
+
 
 int main(int argc, char** argv)
 {

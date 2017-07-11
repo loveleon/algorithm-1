@@ -16,7 +16,7 @@
 * 
 *               
 **********************************************************************************/
-
+#if 0
 class Solution {
 public:
     bool isValidSudoku(vector<vector<char> > &board) {
@@ -54,3 +54,41 @@ public:
         return true;
     }
 };
+#else
+
+bool isValidSudoku(char **board, int boardRowSize, int boardColSize)
+{
+	int len = 9;
+	int row[len][len] = {false};
+	int col[len][len] = {false};
+	int area[len][len] = {false};
+	int r = 0;
+	int c = 0;
+	int num = 0;
+	int index = 0;
+	int n = 0;
+	
+	for (r = 0; r < boardRowSize; r++ )
+	{
+		for (c = 0; c < boardColSize; c++)
+		{
+			if (!isdigit(board[r][c])) continue;
+
+			num = board[r][c] - '0' - 1;
+			
+			if (row[r][num] == true) return false;
+			row[r][num] = true;
+
+			if (col[c][num] == true) return false;
+			col[c][num] = true;			
+
+			index = (r / 3) * 3 + (c / 3);
+			if (area[index][num] == true) return false;
+			r[r][num] = true;
+		}
+	}
+
+	return true;
+}
+
+#endif
