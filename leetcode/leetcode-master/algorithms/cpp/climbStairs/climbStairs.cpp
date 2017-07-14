@@ -10,7 +10,7 @@
 * 
 *               
 **********************************************************************************/
-
+#if 0
 class Solution {
 public:
     
@@ -30,3 +30,15 @@ public:
         return climbStairs(n-1) + climbStairs(n-2);
     }
 };
+#else
+int climbStairs(int n)
+{
+	int count = 0;
+
+	if (n < 3) return n;
+	count = climbStairs(n - 1) + climbStairs( n - 2);
+
+	return count;
+}
+
+#endif
