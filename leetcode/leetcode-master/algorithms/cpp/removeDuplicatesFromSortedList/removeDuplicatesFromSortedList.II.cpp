@@ -22,6 +22,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+#if 0
 ListNode *deleteDuplicates(ListNode *head) {
     ListNode fake(-1);
     fake.next = head;
@@ -49,6 +50,41 @@ ListNode *deleteDuplicates(ListNode *head) {
     }
     return head->next;
 }
+#else
+ListNode* deleteDuplicates(struct ListNode* head)
+{
+	ListNode* p1 = NULL;
+	ListNode* p2 = NULL;
+	ListNode* cur = NULL;
+	ListNode* next = NULL;
+	ListNode* tmp  = NULL;
+	
+	if (!head)
+		return NULL;
+
+	cur = head;
+	while (cur)
+	{
+		next = cur->next;
+
+		if (!next)
+			break; 
+
+		while (next && cur->val == next->val)
+		{
+			tmp  = next;
+			next = next->next;
+			delete tmp;
+		}
+
+		cur->next = next;
+		cur = next;
+	}
+
+	return head;
+}
+
+#endif
 
 void printList(ListNode* h)
 {
