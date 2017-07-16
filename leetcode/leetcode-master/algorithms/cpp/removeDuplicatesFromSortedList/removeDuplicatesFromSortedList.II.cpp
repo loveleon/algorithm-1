@@ -53,12 +53,13 @@ ListNode *deleteDuplicates(ListNode *head) {
 #else
 ListNode* deleteDuplicates(struct ListNode* head)
 {
-	ListNode* p1 = NULL;
-	ListNode* p2 = NULL;
+	ListNode* pre = NULL;
 	ListNode* cur = NULL;
 	ListNode* next = NULL;
 	ListNode* tmp  = NULL;
-	
+	ListNode* new_head = NULL;
+	bool head_flag = true;
+
 	if (!head)
 		return NULL;
 
@@ -66,61 +67,108 @@ ListNode* deleteDuplicates(struct ListNode* head)
 	while (cur)
 	{
 		next = cur->next;
-
-		if (!next)
-			break; 
-
-		while (next && cur->val == next->val)
+		if (next && cur->val == next->val)
 		{
-			tmp  = next;
-			next = next->next;
-			delete tmp;
+			while (next && cur->val == next->val)
+			{
+				tmp  = next;
+				next = next->next;
+				delete tmp;
+				tmp = NULL;
+			}
+
+			delete cur;
+			cur = next;
+			continue;
 		}
 
-		cur->next = next;
-		cur = next;
+		if (head_flag)
+		{
+			new_head = cur;
+			pre = cur;
+			head_flag = false;
+		}
+		else //
+		{
+			pre->next = cur;
+			pre = cur;
+		}
+		cur = cur->next;
 	}
 
-	return head;
+	if (pre)
+		pre->next = NULL;
+
+	return new_head;
 }
+
 
 #endif
 
 void printList(ListNode* h)
 {
-    while(h!=NULL){
-        printf("%d ", h->val);
-        h = h->next;
-    }
-    printf("\n");
+
+ 
+   while(h!=NULL){
+ 
+       printf("%d ", h->val);
+ 
+       h = h->next;
+ 
+   }
+ 
+   printf("\n");
 }
+
 
 ListNode* createList(int a[], int n)
 {
-    ListNode *head=NULL, *p=NULL;
-    for(int i=0; i<n; i++){
-        if (head == NULL){
-            head = p = new ListNode(a[i]);
-        }else{
-            p->next = new ListNode(a[i]);
-            p = p->next;
-        }
-    }
-    return head;
+
+   ListNode *head=NULL, *p=NULL;
+   for(int i=0; i<n; i++){
+ 
+       if (head == NULL){
+ 
+           head = p = new ListNode(a[i]);
+ 
+       }else{
+ 
+           p->next = new ListNode(a[i]);
+ 
+           p = p->next;
+ 
+       }
+ 
+   }
+ 
+   return head;
 }
+
 
 
 int main()
 {
-    int a[]={1,1,2,3,3};
-    int b[]={1,1,1};
-    int c[]={1,2,3};
-    int d[]={3};
 
-    printList(deleteDuplicates(createList(a, sizeof(a)/sizeof(int))));
-    printList(deleteDuplicates(createList(b, sizeof(b)/sizeof(int))));
-    printList(deleteDuplicates(createList(c, sizeof(c)/sizeof(int))));
-    printList(deleteDuplicates(createList(d, sizeof(d)/sizeof(int))));
-    return 0;
+ 
+   int a[]={1,1,2,3,3};
+ 
+   int b[]={1,1,1};
+ 
+   int c[]={1,2,3};
+ 
+   int d[]={1,1,2,2,3};
+
+   printf("test1:\n");
+   printList(deleteDuplicates(createList(a, sizeof(a)/sizeof(int))));
+   printf("test2:\n");
+   printList(deleteDuplicates(createList(b, sizeof(b)/sizeof(int))));
+   printf("test3:\n");
+   printList(deleteDuplicates(createList(c, sizeof(c)/sizeof(int))));
+   printf("test4:\n");
+   printList(deleteDuplicates(createList(d, sizeof(d)/sizeof(int))));
+ 
+   return 0;
+
 }
+
 
