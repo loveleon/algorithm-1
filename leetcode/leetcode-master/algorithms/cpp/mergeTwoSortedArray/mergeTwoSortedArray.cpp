@@ -15,6 +15,8 @@
 
 #include <stdio.h>
 
+#if 0
+
 void merge(int A[], int m, int B[], int n) {
     int ia = m-1 ;
     int ib = n-1 ;
@@ -38,6 +40,47 @@ void merge(int A[], int m, int B[], int n) {
 
     }
 }
+#else
+
+
+void merge(int A[], int m, int B[], int n) 
+{
+	int total = n + m - 1;
+	int a_i = m - 1;
+	int b_i = n -1;
+	int i = 0;
+
+	for (i = total; i >= 0; i--)
+	{
+		if (a_i < 0 && b_i >= 0)
+		{
+			A[i] = B[b_i];
+			b_i--;
+			continue;
+		}
+
+		if (a_i >= 0 && b_i <0)
+		{
+			break;
+		}
+
+		if (a_i >=0 && b_i >=0)
+		{
+			if (A[a_i] > B[b_i])
+			{
+				A[i] = A[a_i];
+				a_i--;
+			}
+			else
+			{
+				A[i] = B[b_i];
+				b_i--;
+			}
+		}
+	}
+}
+
+#endif
 
 void printArray(int A[], int n) {
     printf("{");
