@@ -31,7 +31,7 @@ public:
         }
         return isSameTree2(p, q);
     }
-    
+#if 0 
     bool isSameTree1(TreeNode *p, TreeNode *q) {
         if(!p && !q) return true;  
         if(!p || !q) return false;  
@@ -39,7 +39,26 @@ public:
                 isSameTree(p->left, q->left) &&   
                 isSameTree(p->right, q->right);
     }
-    
+#else
+    bool isSameTree1(TreeNode *p, TreeNode *q)
+    {
+    	bool same = 0;
+		bool left = 0;
+		bool right = 0;
+		
+        if(!p && !q) return true;  
+        if(!p || !q) return false;
+
+        same = p->val == q->val;
+
+		left = isSameTree(p->left, q->left);
+
+		right= isSameTree(p->right, q->right);
+
+        
+        return (same && left && right);
+    }
+#endif
     bool isSameTree2(TreeNode *p, TreeNode *q) {
         
         queue<TreeNode*> q1, q2;
