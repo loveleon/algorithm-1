@@ -46,16 +46,15 @@ public:
 		bool left = 0;
 		bool right = 0;
 		
-        if(!p && !q) return true;  
-        if(!p || !q) return false;
+        if (p == NULL && q == NULL) return true;  
+        if (p == NULL || q == NULL) return false;
 
         same = p->val == q->val;
 
 		left = isSameTree(p->left, q->left);
 
-		right= isSameTree(p->right, q->right);
+		right = isSameTree(p->right, q->right);
 
-        
         return (same && left && right);
     }
 #endif

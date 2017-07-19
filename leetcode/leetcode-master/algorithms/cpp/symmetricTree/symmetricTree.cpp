@@ -74,7 +74,8 @@ public:
         }
         return isSymmetric2(p, q);
     }
-    
+
+#if 0
     bool isSymmetric1(TreeNode *p, TreeNode *q){
         if (p==NULL && q==NULL) return true;
         if (p==NULL || q==NULL) return false;
@@ -83,7 +84,26 @@ public:
                 isSymmetric(p->left, q->right) &&
                 isSymmetric(p->right, q->left);
     }
-    
+#else
+    bool isSymmetric1(TreeNode *p, TreeNode *q)
+    {
+    	bool same = 0;
+		bool same1 = 0;
+		bool same2 = 0;
+		
+        if (p == NULL && q == NULL) return true;  
+        if (p == NULL || q == NULL) return false;
+
+        same = p->val == q->val;
+
+		same1 = isSameTree(p->left, q->right);
+
+		same2 = isSameTree(p->right, q->left);
+
+        return (same && same1 && same2);
+    }
+
+#endif
     bool isSymmetric2(TreeNode *p, TreeNode *q){
 
         queue<TreeNode*> q1;
