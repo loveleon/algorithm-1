@@ -55,7 +55,6 @@
 #include <queue>
 using namespace std;
 
-
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -248,6 +247,40 @@ int printMatrix(vector< vector<int> > &vv)
     }
 }
 
+
+#define MY_CODE 1
+
+void printNodeByLevel(TreeNode *root)  
+{  
+    vector<TreeNode*> vec;
+    int cur , last;//设定该层的起始点和结束点  
+    cur = 0;
+    last = vec.size();
+
+    vec.push_back(root);
+
+    while (cur < vec.size())
+    {//循环截止条件：没有更多层了  
+        last = vec.size();
+
+		cout<<'[';
+        while (cur < last)
+        {//遍历一层
+            cout<<vec[cur]->val<<" ";
+
+            if(vec[cur]->left)//有左孩子
+                vec.push_back(vec[cur]->left);
+
+            if(vec[cur]->right)//有右孩子
+                vec.push_back(vec[cur]->right);
+
+            cur++;
+        }
+
+        cout<<']'<<endl;//该层访问结束，输出换行
+    }
+}  
+
 int main()
 {
     TreeNode *p;
@@ -258,6 +291,9 @@ int main()
     printTree_level_order(p);
     vv = levelOrder(p);
     printMatrix(vv);
+#if MY_CODE
+	printNodeByLevel(p);
+#endif
     cout << endl;
     
     int b[] = {1,0,2};
@@ -265,6 +301,9 @@ int main()
     printTree_level_order(p);
     vv = levelOrder(p);
     printMatrix(vv);
+#if MY_CODE
+	printNodeByLevel(p);
+#endif
     cout << endl;
 
     int c[] = {1,2,0,3,0,4,0,5};
@@ -272,6 +311,9 @@ int main()
     printTree_level_order(p);
     vv = levelOrder(p);
     printMatrix(vv);
+#if MY_CODE
+	printNodeByLevel(p);
+#endif
     cout << endl;
 
     int d[] = {1,2,3,4,0,0,5};
@@ -279,6 +321,9 @@ int main()
     printTree_level_order(p);
     vv = levelOrder(p);
     printMatrix(vv);
+#if MY_CODE
+	printNodeByLevel(p);
+#endif
     cout << endl;
     return 0;
 }
