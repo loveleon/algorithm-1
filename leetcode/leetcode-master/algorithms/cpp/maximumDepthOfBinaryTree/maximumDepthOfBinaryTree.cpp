@@ -48,3 +48,18 @@ public:
         return max(maxDepth(root->left), maxDepth(root->right)) + 1;
     }
 };
+
+class Solution3 {
+public:
+    int maxDepth(TreeNode *root)
+    {
+    	int depth = 0;
+    	
+        if (root == NULL) return 0;
+
+		depth = max(maxDepth(root->left), maxDepth(root->right)) + 1;
+        
+        return depth;
+    }
+};
+
