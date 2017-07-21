@@ -42,3 +42,19 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    int minDepth(TreeNode *root)
+    {
+    	int depth = 0;
+    	
+        if (root == NULL) return 0;
+
+		depth = min(minDepth(root->left), minDepth(root->right)) + 1;
+        
+        return depth;
+        
+    }
+};
+
