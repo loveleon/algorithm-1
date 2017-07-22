@@ -54,7 +54,6 @@ public:
 		depth = min(minDepth(root->left), minDepth(root->right)) + 1;
         
         return depth;
-        
     }
 };
 
