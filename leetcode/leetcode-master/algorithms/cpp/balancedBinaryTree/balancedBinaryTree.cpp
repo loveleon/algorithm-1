@@ -73,3 +73,44 @@ public:
     }
 
 };
+
+class Solution2 {
+public:
+    bool isBalanced(TreeNode *root)
+    {
+        if (root == NULL) return true;
+
+        bool is_left;
+        bool is_right;
+        int left = treeDepth(root->left); 
+        int right = treeDepth(root->right);
+        
+        if (left - right > 1 || left - right < -1)
+        {
+            return false;
+        }
+
+		is_left = isBalanced(root->left);
+
+		is_right = isBalanced(root->right);
+
+        return (is_left && is_right);
+    }
+    
+    int treeDepth(TreeNode *root)
+    {
+        if (root == NULL)
+        {
+            return 0;
+        }
+
+        int left  = 1;
+        int right = 1;
+        
+        left += treeDepth(root->left);
+        right += treeDepth(root->right);
+        
+        return (left > right) ? left : right;
+    }
+};
+
