@@ -23,7 +23,9 @@
 **********************************************************************************/
 
 #include <time.h>
-
+#include <vector>
+#include <algorithm>
+using namespace std;
 /**
  * Definition for binary tree
  * struct TreeNode {
@@ -93,6 +95,28 @@ public:
         }
         
         return false;
+    }
+
+    bool hasPathSum3(TreeNode *root, int sum)
+    {
+    	if (root == NULL) return false;
+
+		if (root->left == NULL && root->right == NULL)
+			return (root->val == sum);
+
+		if (root->left)
+		{
+			root->left->val += root->val;
+			if (hasPathSum3(root->left, sum)) return true;
+		}
+
+		if (root->right)
+		{
+			root->right->val += root->val;
+			if (hasPathSum3(root->right, sum)) return true;
+		}
+		
+		return false;
     }
 
 };
