@@ -69,4 +69,32 @@ public:
             generatePathSum(root->right, sum - root->val, v, result);
         }
     }
+
+    void generatePathSum2(TreeNode *root, int sum, vector<int> v, 
+		vector<vector<int> >& result)
+    {
+        if (root == NULL) return;
+
+        if ((root->left == NULL) && (root->right == NULL))
+        {
+			if (root->val == sum)
+			{
+				v.push_back(root->val);
+				result.push_back(v);
+			}
+			return;
+        }
+
+		v.push_back(root->val);
+		
+		if (root->left)
+		{
+			generatePathSum2(root->left, (sum - root->val), v, result);
+		}
+
+		if (root->right)
+		{
+			generatePathSum2(root->right, (sum - root->val), v, result);
+		}
+    }
 };
