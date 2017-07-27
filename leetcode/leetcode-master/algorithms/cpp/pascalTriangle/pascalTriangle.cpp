@@ -25,6 +25,7 @@
 #include <iostream>
 using namespace std;
 
+#if 0
 vector<vector<int> > generate(int numRows) 
 {
     vector<vector<int> > pascalTriangle;
@@ -43,6 +44,35 @@ vector<vector<int> > generate(int numRows)
     }
     return pascalTriangle;
 }
+#else
+vector<vector<int> > generate(int numRows) 
+{
+    vector<vector<int> > pascalTriangle;
+	int i = 0;
+	int j = 0;
+	//vector<int> v;
+	
+	for (i = 0; i < numRows; i++)
+	{
+		vector<int> v;
+		if (i == 0)
+			v.push_back(1);
+		if (i > 0)
+		{
+			v.push_back(1);
+			for (j = 0; j < pascalTriangle[i-1].size() - 1; j++)
+			{
+ 				v.push_back(pascalTriangle[i-1][j] + pascalTriangle[i-1][j+1]);
+			}
+			v.push_back(1);
+		}
+
+		pascalTriangle.push_back(v);	
+	}
+
+	return pascalTriangle;
+}
+#endif
 
 void printTriangle(vector< vector<int> > pt)
 {
