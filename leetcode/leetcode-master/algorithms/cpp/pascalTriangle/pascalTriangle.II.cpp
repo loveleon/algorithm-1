@@ -19,7 +19,7 @@
 #include <vector>
 #include <iostream>
 using namespace std;
-
+#if 0
 vector<int> getRow(int rowIndex) {
     vector<int> v(rowIndex+1, 0);
     v[0]=1;
@@ -32,6 +32,25 @@ vector<int> getRow(int rowIndex) {
     return v;
     
 }
+#else
+// need to think deep
+vector<int> getRow(int rowIndex)
+{
+	int i = 0;
+    vector<int> v(rowIndex + 1, 0);
+    v[0] = 1;
+
+    for (i = 0; i< rowIndex; i++)
+    {
+        for (int j = i + 1; j > 0; j--)
+        {
+           v[j] += v[j - 1];
+        } 
+    }
+    
+    return v;
+}
+#endif
 
 void printVector( vector<int>  pt)
 {
@@ -44,7 +63,7 @@ void printVector( vector<int>  pt)
 
 int main(int argc, char** argv)
 {
-    int n = 3;
+    int n = 2;
     if (argc>1) {  
         n = atoi(argv[1]);
     }
