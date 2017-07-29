@@ -34,6 +34,13 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+  struct ListNode {
+      int val;
+      ListNode *next;
+      ListNode(int x) : val(x), next(NULL) {}
+  };
+ 
 class Solution {
     public:
         ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
@@ -62,13 +69,45 @@ class Solution {
 
             return headA;
         }
+        
+        ListNode *getIntersectionNode2(ListNode *headA, ListNode *headB) 
+        {
+            //caculate the length of each List
+            int len_a = getListLength(headA);
+            int len_b = getListLength(headB);
+
+            if (len_a <= 0 || len_b <= 0 ) return NULL;
+
+            //let List A is the longest List;
+            if (len_a < len_b)
+            {
+                swap(headA, headB);
+            }
+
+            //move head of List A, make both of Lists are same length 
+            for (int i = 0; i < abs(len_a - len_b); i++)
+            {
+                headA = headA->next;
+            }
+
+            //synced travel both of Lists and check their nodes are same or not 
+            while (headA != headB){
+                headA = headA->next;
+                headB = headB->next;
+            }
+
+            return headA;
+        }
+
     private:    
         inline int getListLength(ListNode *head){
             int len=0;
-            while(head!=NULL){
+            
+            while(head != NULL){
                 head = head->next;
                 len++;
             }
+
             return len;
         }
 };

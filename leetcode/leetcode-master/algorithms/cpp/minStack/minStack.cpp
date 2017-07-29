@@ -1,7 +1,7 @@
 // Source : https://oj.leetcode.com/problems/min-stack/
 // Author : Hao Chen
 // Date   : 2014-11-16
-
+// need to think again
 /********************************************************************************** 
 * 
 * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
