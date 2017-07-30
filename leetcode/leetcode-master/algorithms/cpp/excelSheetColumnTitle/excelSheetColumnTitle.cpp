@@ -31,7 +31,8 @@ string base26_int2str(long long n) {
     string ret;
     while(n>0){
         char ch = 'A' + (n-1)%26;
-        ret.insert(ret.begin(), ch  );
+        ret.insert(ret.begin(), ch  ); //大小序的问题
+        
         n -= (n-1)%26;
         n /= 26;
     }
@@ -54,7 +55,7 @@ string convertToTitle(int n) {
 
 int main(int argc, char**argv)
 {
-    long long n = 27; 
+    long long n = 28;//703; 
     if (argc>1){
         n = atoll(argv[1]);
     }
