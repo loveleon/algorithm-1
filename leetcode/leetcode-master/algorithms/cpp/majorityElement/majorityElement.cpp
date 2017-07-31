@@ -23,6 +23,9 @@ using namespace std;
 // Moore Voting Algorithm
 // Refer to: 
 // http://www.cs.utexas.edu/~moore/best-ideas/mjrty/index.html
+
+// need to think deep: Moore Voting Algorithm
+#if 0
 int majorityElement(vector<int> &num) {
     int majority;
     int cnt = 0;
@@ -38,7 +41,36 @@ int majorityElement(vector<int> &num) {
     return majority;
 
 }
+#else
 
+int majorityElement(vector<int> &num)
+{
+    int majority;
+	int count = 0;
+	int i = 0;
+	
+	for (i = 0; i < num.size(); i++)
+	{
+		if (count == 0)
+		{
+			majority = num[i];
+			count++;
+		}
+		else
+		{
+			if (majority == num[i]) count++;
+			else count--;
+
+			if (count > (num.size() / 2))
+				return majority;
+		}
+	}
+
+	return majority;
+}
+
+
+#endif
 
 vector<int> &split(const string &s, char delim, vector<int> &elems) {
     stringstream ss(s);
@@ -59,7 +91,9 @@ vector<int> split(const string &s, char delim) {
 
 int main(int argc, char** argv)
 {
-    string array = "1,2,1,2,1,2,1,2,1,2,1";
+    //string array = "1,2,1,2,1,2,1,2,1,2,1";
+
+    string array = "2,2,1,1,1";
     if (argc > 1){
         array = argv[1];
     }
