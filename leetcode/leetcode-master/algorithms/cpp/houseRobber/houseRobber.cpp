@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
-using namespace std;    
+using namespace std;
 /*
  * Dynamic Programming
  *
@@ -35,6 +35,7 @@ using namespace std;
  *     dp[2] = max(money[1], money[2])
  *
  */
+#if 0
 int rob1(vector<int> &money) {
 
     int n = money.size();
@@ -71,6 +72,14 @@ int rob(vector<int> &num) {
         return rob1(num);
     return rob2(num);
 }
+#else
+
+int rob(vector<int> &num)
+{
+
+}
+
+#endif
 
 void printVector( vector<int> &v ){
     cout << '[' ;
