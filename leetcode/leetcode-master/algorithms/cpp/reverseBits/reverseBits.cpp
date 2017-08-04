@@ -19,6 +19,13 @@
 **********************************************************************************/
 
 
+// need to think the feature of the bit
+#include <stdlib.h>
+#include <iostream>
+#include <stdint.h>
+using namespace std;
+
+//#define uint32_t unsigned int
 
 class Solution {
 public:
@@ -31,3 +38,11 @@ public:
         return ret;
     }
 };
+
+int main(){
+	uint32_t a = 43261596;
+	Solution s;
+	cout << a <<':'<< "964176192"<<endl;
+	cout << s.reverseBits(a) << endl;
+
+}

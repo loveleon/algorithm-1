@@ -13,6 +13,7 @@
 * Credits:Special thanks to @ts for adding this problem and creating all test cases.
 *               
 **********************************************************************************/
+#include <stdint.h>
 
 class Solution {
 public:
@@ -22,5 +23,17 @@ public:
             if (n & 0x1) cnt++;
         }
         return cnt;
+    }
+
+    int hammingWeight1(uint32_t n)
+    {
+		int cnt = 0;
+		
+		for (; n > 0; (n / 2))
+		{
+			if (n & 0x1) cnt++;
+		}
+
+		return cnt;
     }
 };
