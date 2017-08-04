@@ -88,7 +88,7 @@ class Solution {
         }
 };
 
-// 2 3 4 5 10= 120 
+// 2 3 4 5 = 120 
 int main()
 {
 	Solution s;

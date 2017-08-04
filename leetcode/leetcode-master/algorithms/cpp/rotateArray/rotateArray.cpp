@@ -39,7 +39,7 @@ void reverseArray(int nums[],int start, int end){
  * because (X^TY^T)^T = YX, so we can perform rotate operation three times to get the result
  * obviously, the algorithm consumes O(1) space and O(n) time
  */
-
+#if 0
 void rotate1(int nums[], int n, int k) {
     if (k<=0) return;
     k %= n; 
@@ -91,6 +91,34 @@ void rotate(int nums[], int n, int k) {
     return rotate2(nums, n, k);
 }
 
+#else
+// need to optimize
+void rotate(int nums[], int n, int k)
+{
+	int i = 0;
+	int j = 0;
+	int tail = 0;
+
+	if (k<=0) return;
+
+	for (i = 0; i < k; i++)
+	{
+		tail = nums[n - 1];
+		int tmp = nums[0];
+		int last = nums[0];
+		for (j = 0; j < n; j++)
+		{
+			last = tmp;
+			tmp = nums[j + 1];
+			nums[j + 1] = last;
+		}
+		nums[0] = tail;
+	}
+}
+
+#endif
+
+
 void printArray(int nums[], int n) {
     cout << "[ " ;
     for(int i=0; i<n; i++) {
@@ -114,7 +142,7 @@ int main(int argc, char**argv) {
 
     const int n = sizeof(nums)/sizeof(int);
 
-    for (int i=0; i<n; i++) {
+    for (int i=2; i<3; i++) {
         initArray(nums, n);
         rotate(nums, n, i);
         printArray(nums, n);
