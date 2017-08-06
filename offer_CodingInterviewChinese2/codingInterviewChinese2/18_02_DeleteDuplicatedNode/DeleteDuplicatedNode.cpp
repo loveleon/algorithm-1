@@ -21,7 +21,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/List.h"
 using namespace std;
 
-void DeleteDuplication(ListNode** pHead)
+void DeleteDuplication_org(ListNode** pHead)
 {
     if(pHead == nullptr || *pHead == nullptr)
         return;
@@ -63,6 +63,152 @@ void DeleteDuplication(ListNode** pHead)
     }
 }
 
+void DeleteDuplication(ListNode** pphead)
+{
+  if (pphead == NULL | *pphead == NULL)
+    return;
+  
+  ListNode* pprenode = nullptr;
+  ListNode* pnode = *pphead;
+
+  while (pnode != NULL)
+  {
+    bool dup_flag = false;
+    ListNode* pnext = pnode->m_pNext;
+
+    if (pnext != NULL && pnext->m_nValue == pnode->m_nValue)
+    {
+      dup_flag = true;
+    }
+
+    if (dup_flag != true)
+    {
+      pprenode = pnode;
+      pnode = pnode->m_pNext;
+    }
+    else //del the node with the same value
+    {
+      int value = pnode->m_nValue;
+      ListNode* pnext = NULL;
+      ListNode* pdel  = pnode;
+      while (pdel != NULL && 
+            pdel->m_nValue == value)
+      {
+        pnext = pdel->m_pNext;
+
+        delete pdel;
+        pdel = NULL;
+
+        pdel = pnext;
+      }
+
+      if (pprenode == NULL)
+      {
+        *pphead = pnext;
+      }
+      else
+      {
+        pprenode->m_pNext = pnext;
+      }
+      pnode = pnext; //need to care
+    }
+  }
+}
+
+void DeleteDuplication_1(ListNode** pphead)
+{
+  if (pphead == NULL | *pphead == NULL)
+    return;
+  
+  bool dup_flag = false;
+  ListNode* pprenode = nullptr;
+  ListNode* pnode = *pphead;
+  
+  while (pnode != NULL)
+  {
+    ListNode* pnext_node = pnode->m_pNext;
+    
+    if (pnode->m_pNext == NULL)
+    {
+      if (pprenode != NULL)
+      {
+        pprenode->m_pNext = pnode;
+        pprenode->m_pNext->m_pNext = NULL;
+      }
+      else
+      {
+        if (dup_flag != true)
+        {
+          pprenode = pnode;
+          *pphead = pprenode;
+        }
+        else
+        {
+          if (pprenode == NULL)
+          {
+            pprenode = pnode;
+            *pphead = pprenode;
+            pprenode->m_pNext = NULL;
+          }
+        }
+      }
+      break;
+    }
+
+    if (pnode->m_nValue != pnext_node->m_nValue)
+    {
+      if (dup_flag != true)
+      {
+        if (pprenode != NULL)
+          pprenode->m_pNext = pnode;
+        else
+        {
+          pprenode = pnode;
+          *pphead = pprenode;
+        }
+
+        pprenode = pnode;
+        pnode = pnext_node;
+      }
+      else
+      {
+        dup_flag = false;
+        //pnode = pnext_node;
+      }
+    }
+    else //del the node with the same value  
+    {
+      int value = pnode->m_nValue;
+      ListNode* pnext = NULL;
+      ListNode* pdel  = pnode;
+      while (pdel != NULL && 
+            pdel->m_nValue == value)
+      {
+        pnext = pdel->m_pNext;
+
+        delete pdel;
+        pdel = NULL;
+
+        pdel = pnext;
+      }
+
+      pnode = pnext;
+      dup_flag = true;
+    }
+  }
+
+  if (pprenode == NULL)
+  {
+    *pphead = pprenode;
+  }
+  else
+  {
+    if (pnode == NULL)
+      pprenode->m_pNext = NULL;
+  }
+}
+
+
 // ====================测试代码====================
 void Test(char* testName, ListNode** pHead, int* expectedValues, int expectedLength)
 {
@@ -85,31 +231,15 @@ void Test(char* testName, ListNode** pHead, int* expectedValues, int expectedLen
     if(pNode == nullptr && index == expectedLength)
         printf("Passed.\n");
     else
-        printf("FAILED.\n");
-}
-
-void Test(string *testName, ListNode** pHead, int* expectedValues, int expectedLength)
-{
-    if(testName != nullptr)
-        printf("%s begins: ", testName);
-
-    DeleteDuplication(pHead);
-
-    int index = 0;
-    ListNode* pNode = *pHead;
-    while(pNode != nullptr && index < expectedLength)
     {
-        if(pNode->m_nValue != expectedValues[index])
-            break;
-
-        pNode = pNode->m_pNext;
-        index++;
-    }
-
-    if(pNode == nullptr && index == expectedLength)
-        printf("Passed.\n");
-    else
         printf("FAILED.\n");
+        pNode = *pHead;
+        while(pNode != NULL)
+        {
+            printf("the value is %d.\n", pNode->m_nValue);
+            pNode = pNode->m_pNext;
+        }
+    }
 }
 
 // 某些结点是重复的
