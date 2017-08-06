@@ -77,9 +77,7 @@ void DeleteDuplication(ListNode** pphead)
     ListNode* pnext = pnode->m_pNext;
 
     if (pnext != NULL && pnext->m_nValue == pnode->m_nValue)
-    {
       dup_flag = true;
-    }
 
     if (dup_flag != true)
     {
@@ -102,14 +100,11 @@ void DeleteDuplication(ListNode** pphead)
         pdel = pnext;
       }
 
-      if (pprenode == NULL)
-      {
-        *pphead = pnext;
-      }
+      if (pprenode == NULL) 
+        *pphead = pnext; // the head changed,  good taste
       else
-      {
         pprenode->m_pNext = pnext;
-      }
+
       pnode = pnext; //need to care
     }
   }
@@ -207,7 +202,6 @@ void DeleteDuplication_1(ListNode** pphead)
       pprenode->m_pNext = NULL;
   }
 }
-
 
 // ====================²âÊÔ´úÂë====================
 void Test(char* testName, ListNode** pHead, int* expectedValues, int expectedLength)
