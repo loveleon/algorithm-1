@@ -18,9 +18,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 表3所示。
 
 #include <cstdio>
-#include "..\Utilities\List.h"
+#include "../Utilities/List.h"
 
-ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+ListNode* Merge_org(ListNode* pHead1, ListNode* pHead2)
 {
     if(pHead1 == nullptr)
         return pHead2;
@@ -32,15 +32,37 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
     if(pHead1->m_nValue < pHead2->m_nValue)
     {
         pMergedHead = pHead1;
-        pMergedHead->m_pNext = Merge(pHead1->m_pNext, pHead2);
+        pMergedHead->m_pNext = Merge_org(pHead1->m_pNext, pHead2);
     }
     else
     {
         pMergedHead = pHead2;
-        pMergedHead->m_pNext = Merge(pHead1, pHead2->m_pNext);
+        pMergedHead->m_pNext = Merge_org(pHead1, pHead2->m_pNext);
     }
 
     return pMergedHead;
+}
+
+ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+{
+  if (pHead1 == NULL)
+    return pHead2;
+  if (pHead2 == NULL)
+    return pHead1;
+
+  ListNode* pmergelist = NULL;
+  if (pHead1->m_nValue <= pHead2->m_nValue)
+  {
+    pmergelist = pHead1;
+    pmergelist->m_pNext = Merge(pHead1->m_pNext, pHead2);
+  }
+  else
+  {
+    pmergelist = pHead2;
+    pmergelist->m_pNext = Merge(pHead2->m_pNext, pHead1);
+  }
+
+  return pmergelist;
 }
 
 // ====================测试代码====================
