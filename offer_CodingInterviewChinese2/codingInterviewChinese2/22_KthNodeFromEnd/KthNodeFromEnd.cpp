@@ -19,9 +19,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 值为4的结点。
 
 #include <cstdio>
-#include "..\Utilities\List.h"
+#include "../Utilities/List.h"
 
-ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
+ListNode* FindKthToTail_org(ListNode* pListHead, unsigned int k)
 {
     if(pListHead == nullptr || k == 0)
         return nullptr;
@@ -48,6 +48,40 @@ ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
 
     return pBehind;
 }
+
+ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
+{
+  int i = 0;
+
+#if 1
+  //adding the code is better although later code could hande the exception
+  if (pListHead == NULL || k == 0)
+    return NULL;
+#endif 
+
+  ListNode* ahead = pListHead;
+  for (i = 0; i < k; i++)
+  {
+    if (ahead != NULL)
+    {
+      ahead = ahead->m_pNext;
+    }
+    else
+    {
+      return NULL;
+    }
+  }
+
+  ListNode* knode = pListHead;
+  while (ahead != NULL)
+  {
+    ahead = ahead->m_pNext;
+    knode = knode->m_pNext;
+  }
+
+  return knode;
+}
+
 
 // ====================测试代码====================
 // 测试要找的结点在链表中间
