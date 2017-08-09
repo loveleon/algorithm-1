@@ -17,9 +17,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 环的入口结点是结点3。
 
 #include <cstdio>
-#include "../Utilities/list.h"
+#include "../Utilities/List.h"
 
-ListNode* MeetingNode(ListNode* pHead)
+ListNode* MeetingNode_org(ListNode* pHead)
 {
     if(pHead == nullptr)
         return nullptr;
@@ -44,9 +44,9 @@ ListNode* MeetingNode(ListNode* pHead)
     return nullptr;
 }
 
-ListNode* EntryNodeOfLoop(ListNode* pHead)
+ListNode* EntryNodeOfLoop_org(ListNode* pHead)
 {
-    ListNode* meetingNode = MeetingNode(pHead);
+    ListNode* meetingNode = MeetingNode_org(pHead);
     if(meetingNode == nullptr)
         return nullptr;
 
@@ -74,6 +74,63 @@ ListNode* EntryNodeOfLoop(ListNode* pHead)
 
     return pNode1;
 }
+
+ListNode* MeetingNode(ListNode* pHead)
+{
+  if (pHead == NULL)
+    return NULL;
+
+  ListNode* pslow = pHead->m_pNext;
+  if (pslow == NULL)
+    return NULL;
+  
+  ListNode* pfast = pslow->m_pNext;
+  while (pfast != NULL && pslow != NULL)
+  {
+    if (pfast->m_nValue == pslow->m_nValue)
+      return pslow;
+
+    pslow = pslow->m_pNext;
+
+    pfast = pfast->m_pNext;
+    if (pfast != NULL)
+      pfast = pfast->m_pNext;
+  }
+
+  return NULL;
+}
+
+ListNode* EntryNodeOfLoop(ListNode* pHead)
+{
+  ListNode* loopnode = MeetingNode(pHead);
+  if (loopnode == NULL)
+    return NULL;
+
+  int loopnum = 1;
+  ListNode* pcur = loopnode->m_pNext;
+  while (pcur != loopnode)
+  {
+    pcur = pcur->m_pNext;
+    loopnum++;
+  }
+
+  ListNode* pfast = pHead;
+  ListNode* pslow = pHead;  
+  int i = 0;
+  for (i = 0; i < loopnum; i++)
+  {
+    pfast = pfast->m_pNext;
+  }
+
+  while (pslow->m_nValue != pfast->m_nValue)
+  {
+    pslow = pslow->m_pNext;
+    pfast = pfast->m_pNext;
+  }
+
+  return pfast;
+}
+
 
 // ==================== Test Code ====================
 void Test(char* testName, ListNode* pHead, ListNode* entryNode)

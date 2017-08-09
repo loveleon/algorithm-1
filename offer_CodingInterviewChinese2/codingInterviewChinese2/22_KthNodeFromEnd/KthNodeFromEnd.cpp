@@ -51,14 +51,13 @@ ListNode* FindKthToTail_org(ListNode* pListHead, unsigned int k)
 
 ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
 {
-  int i = 0;
-
 #if 1
   //adding the code is better although later code could hande the exception
   if (pListHead == NULL || k == 0)
     return NULL;
-#endif 
+#endif
 
+  int i = 0;
   ListNode* ahead = pListHead;
   for (i = 0; i < k; i++)
   {
