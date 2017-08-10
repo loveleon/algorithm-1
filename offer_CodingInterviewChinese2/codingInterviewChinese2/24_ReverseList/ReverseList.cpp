@@ -17,9 +17,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 头结点。
 
 #include <cstdio>
-#include "..\Utilities\List.h"
+#include "../Utilities/List.h"
 
-ListNode* ReverseList(ListNode* pHead)
+ListNode* ReverseList_org(ListNode* pHead)
 {
     ListNode* pReversedHead = nullptr;
     ListNode* pNode = pHead;
@@ -38,6 +38,29 @@ ListNode* ReverseList(ListNode* pHead)
     }
 
     return pReversedHead;
+}
+
+// the org is clean and good taste, need to learn
+ListNode* ReverseList(ListNode* phead)
+{
+  if (phead == NULL || phead->m_pNext == NULL)
+    return NULL;
+
+  ListNode* first  = phead;
+  ListNode* second = phead->m_pNext;
+  ListNode* pnode = NULL;
+
+  first->m_pNext = NULL;
+  
+  while (second != NULL)
+  {
+    pnode  = second->m_pNext;
+    second->m_pNext = first;
+    first  = second;
+    second = pnode;
+  }
+
+  return first;
 }
 
 // ====================测试代码====================
