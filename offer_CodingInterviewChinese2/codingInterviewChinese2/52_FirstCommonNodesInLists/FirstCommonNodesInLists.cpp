@@ -16,9 +16,21 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 题目：输入两个链表，找出它们的第一个公共结点。
 
 #include <cstdio>
-#include "..\Utilities\List.h"
+#include "../Utilities/List.h"
 
-unsigned int GetListLength(ListNode* pHead);
+# if 0
+unsigned int GetListLength(ListNode* pHead)
+{
+    unsigned int nLength = 0;
+    ListNode* pNode = pHead;
+    while(pNode != nullptr)
+    {
+        ++nLength;
+        pNode = pNode->m_pNext;
+    }
+
+    return nLength;
+}
 
 ListNode* FindFirstCommonNode(ListNode *pHead1, ListNode *pHead2)
 {
@@ -54,18 +66,59 @@ ListNode* FindFirstCommonNode(ListNode *pHead1, ListNode *pHead2)
     return pFisrtCommonNode;
 }
 
+#else
 unsigned int GetListLength(ListNode* pHead)
 {
-    unsigned int nLength = 0;
-    ListNode* pNode = pHead;
-    while(pNode != nullptr)
-    {
-        ++nLength;
-        pNode = pNode->m_pNext;
-    }
+  unsigned int length = 0;
 
-    return nLength;
+  ListNode* pnode = pHead;
+  while (pnode != NULL)
+  {
+    pnode = pnode->m_pNext;
+    length++;
+  }
+
+  return length;
 }
+
+ListNode* FindFirstCommonNode(ListNode *pHead1, ListNode *pHead2)
+{
+  unsigned int length1 = GetListLength(pHead1);
+  unsigned int length2 = GetListLength(pHead2);
+  unsigned int dis = 0;
+
+  ListNode* pnode_l = NULL;
+  ListNode* pnode_s = NULL;  
+  if (length1 >= length2)
+  {
+    dis = length1 - length2;
+    pnode_l = pHead1;
+    pnode_s = pHead2;
+  }
+  else if (length2 > length1)
+  {
+    dis = length2 - length1;
+    pnode_l = pHead2;
+    pnode_s = pHead1;
+  }
+
+  int i = 0;
+  for (i = 0; i < dis; i++)
+  {
+    pnode_l = pnode_l->m_pNext;
+  }
+
+  while (pnode_l != NULL && pnode_s != NULL &&
+        pnode_l->m_nValue != pnode_s->m_nValue)
+  {
+    pnode_l = pnode_l->m_pNext;
+    pnode_s = pnode_s->m_pNext;
+  }
+
+  return pnode_l;
+}
+
+#endif
 
 // ====================测试代码====================
 void DestroyNode(ListNode* pNode);
