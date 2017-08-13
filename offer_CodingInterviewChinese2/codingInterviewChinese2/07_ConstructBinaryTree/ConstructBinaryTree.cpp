@@ -23,6 +23,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <exception>
 #include <cstdio>
 
+#if 0
 BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, int* startInorder, int* endInorder);
 
 BinaryTreeNode* Construct(int* preorder, int* inorder, int length)
@@ -79,6 +80,53 @@ BinaryTreeNode* ConstructCore
 
     return root;
 }
+#else
+BinaryTreeNode* ConstructCore(int* startPreorder, int* endPreorder, 
+                                    int* startInorder, int* endInorder)
+{
+  int root = startPreorder[0];
+  BinaryTreeNode* rootnode = new BinaryTreeNode();
+  rootnode->m_nValue = root;
+  rootnode->m_pLeft = rootnode->m_pRight = NULL;
+
+  if (startPreorder == endPreorder && 
+      startInorder == endInorder &&
+      *startPreorder == *startInorder)
+  {
+    return rootnode;
+  }
+
+  int leftcount = 0;
+  int* rootinorder = startInorder;
+  while (rootinorder < endInorder && *rootinorder != root)
+  {
+    rootinorder++;
+    leftcount++;
+  }
+
+  if (leftcount > 0)
+    rootnode->m_pLeft = ConstructCore(startPreorder + 1, 
+                                   startPreorder + leftcount,
+                                   startInorder, rootinorder - 1);
+
+  int rightcount =  endInorder - rootinorder;                                
+  if (rightcount > 0)
+    rootnode->m_pRight = ConstructCore(startPreorder + leftcount + 1, 
+                                     endPreorder,
+                                     rootinorder + 1, endInorder);
+  return rootnode; //need to care
+}
+
+BinaryTreeNode* Construct(int* preorder, int* inorder, int length)
+{
+  if (preorder == NULL || inorder == NULL || length <= 0)
+    return NULL;
+
+  return ConstructCore(preorder, preorder + length - 1, 
+                        inorder, inorder + length - 1);
+}
+
+#endif
 
 // ====================²âÊÔ´úÂë====================
 void Test(char* testName, int* preorder, int* inorder, int length)
@@ -99,7 +147,7 @@ void Test(char* testName, int* preorder, int* inorder, int length)
     try
     {
         BinaryTreeNode* root = Construct(preorder, inorder, length);
-        //PrintTree(root);
+        PrintTree(root);
 
         DestroyTree(root);
     }
