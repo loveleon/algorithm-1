@@ -27,7 +27,7 @@ struct BinaryTreeNode
     BinaryTreeNode*        m_pParent;
 };
 
-BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
+BinaryTreeNode* GetNext_org(BinaryTreeNode* pNode)
 {
     if(pNode == nullptr)
         return nullptr;
@@ -56,6 +56,31 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
 
     return pNext;
 }
+
+// code again 2017/10/06
+BinaryTreeNode* GetNext(BinaryTreeNode* pnode)
+{
+  if (pnode->m_pRight!= NULL)
+  {
+    BinaryTreeNode* pnext = pnode->m_pRight;
+    while (pnext->m_pLeft != NULL)
+    {
+      pnext = pnext->m_pLeft;
+    }
+    return pnext;
+  }
+  else
+  {
+    BinaryTreeNode* pcur = pnode;
+    while (pcur->m_pParent!= NULL && pcur->m_pParent->m_pLeft != pcur)
+    {
+      pcur = pcur->m_pParent;
+    }
+
+    return pcur->m_pParent;
+  }
+}
+
 
 // DIY
 BinaryTreeNode* GetNext2(BinaryTreeNode *pNode)
