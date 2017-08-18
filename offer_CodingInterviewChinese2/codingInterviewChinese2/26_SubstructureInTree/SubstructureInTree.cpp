@@ -16,6 +16,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 题目：输入两棵二叉树A和B，判断B是不是A的子结构。
 
 #include <cstdio>
+#include "../Utilities/offer.h"
 
 struct BinaryTreeNode
 {
@@ -24,6 +25,7 @@ struct BinaryTreeNode
     BinaryTreeNode*        m_pRight;
 };
 
+#if 0
 bool DoesTree1HaveTree2(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2);
 bool Equal(double num1, double num2);
 
@@ -66,6 +68,62 @@ bool Equal(double num1, double num2)
     else
         return false;
 }
+
+#else
+
+bool equal(double num1, double num2)
+{
+    if((num1 - num2 > -0.0000001) && (num1 - num2 < 0.0000001))
+        return true;
+    else
+        return false;
+}
+
+bool DoesTree1HaveTree2(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
+{
+  if (pRoot2 == NULL)
+    return true;
+  if (pRoot1 == NULL)
+    return false;
+
+  if (pRoot1->m_dbValue != pRoot2->m_dbValue)
+    return false;
+
+  return DoesTree1HaveTree2(pRoot1->m_pLeft, pRoot2->m_pLeft) && 
+         DoesTree1HaveTree2(pRoot1->m_pRight, pRoot2->m_pRight);
+}
+
+bool HasSubtree(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
+{
+  bool hassub = false;
+
+// b == NULL or   b == NULL AND A == NULL 
+#if 0
+  if (pRoot1 == NULL && pRoot2 == NULL)
+    return true;
+
+  if (pRoot1 == NULL && pRoot2 != NULL)
+    return false; 
+
+  if (pRoot1 != NULL && pRoot2 == NULL)
+    return true;
+#endif 
+  if (pRoot1 != NULL && pRoot2 != NULL)
+  {
+    if (equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
+      hassub = DoesTree1HaveTree2(pRoot1, pRoot2);
+
+    if (hassub != true)
+      hassub = HasSubtree(pRoot1->m_pLeft, pRoot2);
+    if (hassub != true)
+      hassub = HasSubtree(pRoot1->m_pRight, pRoot2);
+  }
+
+  return hassub;
+}
+
+
+#endif
 
 // ====================辅助测试代码====================
 BinaryTreeNode* CreateBinaryTreeNode(double dbValue)
