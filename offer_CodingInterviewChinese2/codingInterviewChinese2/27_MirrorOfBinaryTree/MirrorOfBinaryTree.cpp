@@ -20,6 +20,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 #include <stack>
 
+#define FLAG 1
+
+#if 0
 void MirrorRecursively(BinaryTreeNode *pNode)
 {
     if((pNode == nullptr) || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
@@ -35,6 +38,7 @@ void MirrorRecursively(BinaryTreeNode *pNode)
     if(pNode->m_pRight)
         MirrorRecursively(pNode->m_pRight); 
 }
+#else
 
 void MirrorIteratively(BinaryTreeNode* pRoot)
 {
@@ -61,6 +65,36 @@ void MirrorIteratively(BinaryTreeNode* pRoot)
     }
 }
 
+// the org 
+//    if((pNode == nullptr) || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
+//        return;
+//   and 
+//    if(pNode->m_pLeft)
+//        MirrorRecursively(pNode->m_pLeft);
+// can be ingnored, all right, you can think
+void MirrorRecursively(BinaryTreeNode *pNode)
+{
+  if (pNode == NULL)
+    return;
+
+  BinaryTreeNode* tmp;
+  tmp = pNode->m_pLeft;
+  pNode->m_pLeft = pNode->m_pRight;
+  pNode->m_pRight = tmp;
+
+  MirrorRecursively(pNode->m_pLeft);
+  MirrorRecursively(pNode->m_pRight);
+}
+
+void MirrorIteratively_my(BinaryTreeNode* pRoot)
+{
+
+}
+
+#endif 
+
+
+
 // ====================测试代码====================
 // 测试完全二叉树：除了叶子节点，其他节点都有两个子节点
 //            8
@@ -82,14 +116,15 @@ void Test1()
     ConnectTreeNodes(pNode10, pNode9, pNode11);
 
     PrintTree(pNode8);
-
+#if FLAG
     printf("=====Test1: MirrorRecursively=====\n");
     MirrorRecursively(pNode8);
     PrintTree(pNode8);
-
+#else
     printf("=====Test1: MirrorIteratively=====\n");
     MirrorIteratively(pNode8);
     PrintTree(pNode8);
+#endif
 
     DestroyTree(pNode8);
 }
@@ -115,15 +150,15 @@ void Test2()
     ConnectTreeNodes(pNode5, pNode4, nullptr);
 
     PrintTree(pNode8);
-
+#if FLAG
     printf("=====Test2: MirrorRecursively=====\n");
     MirrorRecursively(pNode8);
     PrintTree(pNode8);
-
+#else
     printf("=====Test2: MirrorIteratively=====\n");
     MirrorIteratively(pNode8);
     PrintTree(pNode8);
-
+#endif
     DestroyTree(pNode8);
 }
 
@@ -148,15 +183,15 @@ void Test3()
     ConnectTreeNodes(pNode5, nullptr, pNode4);
 
     PrintTree(pNode8);
-
+#if FLAG 
     printf("=====Test3: MirrorRecursively=====\n");
     MirrorRecursively(pNode8);
     PrintTree(pNode8);
-
+#else
     printf("=====Test3: MirrorIteratively=====\n");
     MirrorIteratively(pNode8);
     PrintTree(pNode8);
-
+#endif
     DestroyTree(pNode8);
 }
 
@@ -167,14 +202,15 @@ void Test4()
     BinaryTreeNode* pNode = nullptr;
 
     PrintTree(pNode);
-
+#if FLAG 
     printf("=====Test4: MirrorRecursively=====\n");
     MirrorRecursively(pNode);
     PrintTree(pNode);
-
+#else
     printf("=====Test4: MirrorIteratively=====\n");
     MirrorIteratively(pNode);
     PrintTree(pNode);
+#endif
 }
 
 // 测试只有一个结点的二叉树
@@ -184,14 +220,16 @@ void Test5()
     BinaryTreeNode* pNode8 = CreateBinaryTreeNode(8);
 
     PrintTree(pNode8);
-
-    printf("=====Test4: MirrorRecursively=====\n");
+#if FLAG 
+    printf("=====Test5: MirrorRecursively=====\n");
     MirrorRecursively(pNode8);
     PrintTree(pNode8);
-
-    printf("=====Test4: MirrorIteratively=====\n");
+#else
+    printf("=====Test5: MirrorIteratively=====\n");
     MirrorIteratively(pNode8);
     PrintTree(pNode8);
+#endif
+    DestroyTree(pNode8);
 }
 
 int main(int argc, char* argv[])
