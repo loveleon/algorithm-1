@@ -65,13 +65,14 @@ void MirrorIteratively(BinaryTreeNode* pRoot)
     }
 }
 
-// the org 
-//    if((pNode == nullptr) || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
+// the org NULL handling is verbose
+//    if(... || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
 //        return;
 //   and 
 //    if(pNode->m_pLeft)
 //        MirrorRecursively(pNode->m_pLeft);
-// can be ingnored, all right, you can think
+// can be ignored, all right for the moment
+// the follow, performance is better
 void MirrorRecursively(BinaryTreeNode *pNode)
 {
   if (pNode == NULL)
