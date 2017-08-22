@@ -19,6 +19,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <cstdio>
 #include "../Utilities/BinaryTree.h"
 
+#if 0
 bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2);
 
 bool isSymmetrical(BinaryTreeNode* pRoot)
@@ -40,6 +41,35 @@ bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
     return isSymmetrical(pRoot1->m_pLeft, pRoot2->m_pRight)
         && isSymmetrical(pRoot1->m_pRight, pRoot2->m_pLeft);
 }
+#else
+
+bool isSymmetrical(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
+{
+  if (pRoot1 == NULL && pRoot2 == NULL)
+    return true;
+
+  bool iss = false;
+
+  if (pRoot1 != NULL && pRoot2 != NULL)
+  {
+    if (pRoot1->m_nValue != pRoot2->m_nValue)
+      return false;
+
+    iss = isSymmetrical(pRoot1->m_pLeft, pRoot2->m_pRight) &&
+          isSymmetrical(pRoot1->m_pRight, pRoot2->m_pLeft); 
+  }
+
+  return iss;
+}
+
+bool isSymmetrical(BinaryTreeNode* pRoot)
+{
+    return isSymmetrical(pRoot, pRoot);
+}
+
+#endif
+
+
 
 // ====================≤‚ ‘¥˙¬Î====================
 void Test(char* testName, BinaryTreeNode* pRoot, bool expected)
