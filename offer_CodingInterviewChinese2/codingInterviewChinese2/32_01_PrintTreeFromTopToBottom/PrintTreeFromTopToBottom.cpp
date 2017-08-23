@@ -21,7 +21,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <deque>
 #include <queue>
 
-void PrintFromTopToBottom(BinaryTreeNode* pRoot)
+void PrintFromTopToBottom_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
         return;
@@ -43,6 +43,30 @@ void PrintFromTopToBottom(BinaryTreeNode* pRoot)
         if(pNode->m_pRight)
             dequeTreeNode.push_back(pNode->m_pRight);
     }
+}
+
+void PrintFromTopToBottom(BinaryTreeNode* pRoot)
+{
+  if (pRoot == NULL)
+    return;
+
+  std::deque<BinaryTreeNode*> dequebt;
+  dequebt.push_back(pRoot);
+  BinaryTreeNode* pnode = NULL;
+  
+  while (dequebt.size())
+  {
+    pnode = dequebt.front();
+    dequebt.pop_front();
+    printf("%d ", pnode->m_nValue);
+
+    if (pnode->m_pLeft)
+      dequebt.push_back(pnode->m_pLeft);
+    
+    if (pnode->m_pRight)
+      dequebt.push_back(pnode->m_pRight);
+      
+  }
 }
 
 // my code
@@ -116,7 +140,7 @@ void Test(char* testName, BinaryTreeNode* pRoot)
     PrintTree(pRoot);
 
     printf("The nodes from top to bottom, from left to right are: \n");
-    PrintFromTopToBottom3(pRoot);
+    PrintFromTopToBottom(pRoot);
 
     printf("\n\n");
 }
