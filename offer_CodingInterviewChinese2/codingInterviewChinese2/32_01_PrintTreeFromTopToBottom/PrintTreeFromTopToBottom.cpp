@@ -52,10 +52,10 @@ void PrintFromTopToBottom(BinaryTreeNode* pRoot)
 
   std::deque<BinaryTreeNode*> dequebt;
   dequebt.push_back(pRoot);
-  BinaryTreeNode* pnode = NULL;
-  
+
   while (dequebt.size())
   {
+    BinaryTreeNode* pnode = NULL;
     pnode = dequebt.front();
     dequebt.pop_front();
     printf("%d ", pnode->m_nValue);
@@ -65,7 +65,6 @@ void PrintFromTopToBottom(BinaryTreeNode* pRoot)
     
     if (pnode->m_pRight)
       dequebt.push_back(pnode->m_pRight);
-      
   }
 }
 

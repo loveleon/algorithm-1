@@ -21,7 +21,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 #include <queue>
 
-void Print1(BinaryTreeNode* pRoot)
+void Print_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
         return;
@@ -55,6 +55,45 @@ void Print1(BinaryTreeNode* pRoot)
             nextLevel = 0;
         }
     }
+}
+
+void Print(BinaryTreeNode* pRoot)
+{
+  if (pRoot == NULL)
+    return;
+   
+  int nextlevel = 0;
+  int tobeprint = 1;
+  std::deque<BinaryTreeNode*> dequebt;
+  dequebt.push_back(pRoot);
+  
+  while (dequebt.size())
+  {
+    BinaryTreeNode* pnode = NULL;
+    pnode = dequebt.front();
+    printf("%d ", pnode->m_nValue);
+
+    if (pnode->m_pLeft)
+    {
+      dequebt.push_back(pnode->m_pLeft);
+      nextlevel++;
+    }
+    
+    if (pnode->m_pRight)
+    {
+      dequebt.push_back(pnode->m_pRight);
+      nextlevel++;
+    }
+
+    dequebt.pop_front();
+    --tobeprint;
+    if (tobeprint == 0)
+    {
+      printf("\n");
+      tobeprint = nextlevel;
+      nextlevel = 0;
+    }
+  }
 }
 
 // my code
@@ -99,9 +138,9 @@ void Print2(BinaryTreeNode* pRoot)
 	}
 }
 
-void Print(BinaryTreeNode* pRoot)
+void Print_interface(BinaryTreeNode* pRoot)
 {
-	return Print2(pRoot);
+	return Print(pRoot);
 }
 
 // ====================≤‚ ‘¥˙¬Î====================
@@ -129,7 +168,7 @@ void Test1()
     printf("5 7 9 11 \n\n");
 
     printf("Actual Result is: \n");
-    Print(pNode8);
+    Print_interface(pNode8);
     printf("\n");
 
     DestroyTree(pNode8);
