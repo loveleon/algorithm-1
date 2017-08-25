@@ -22,7 +22,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 #include <stack>
 
-void Print1(BinaryTreeNode* pRoot)
+void Print_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
         return;
@@ -61,6 +61,62 @@ void Print1(BinaryTreeNode* pRoot)
             next = 1 - next;
         }
     }
+}
+
+void Print(BinaryTreeNode* pRoot)
+{
+  if (pRoot == NULL)
+    return;
+
+  int left_to_right = 1;
+  int current = 0;
+  int nextlevel = 1;
+  std::stack<BinaryTreeNode*> stackbt[2];
+  stackbt[current].push(pRoot);
+
+  while (stackbt[current].size() || stackbt[nextlevel].size())
+  {
+    BinaryTreeNode* pnode = NULL;
+    pnode = stackbt[current].top();
+    printf("%d ", pnode->m_nValue);
+
+    if (left_to_right > 0)
+    {
+      if (pnode->m_pLeft)
+      {
+        stackbt[nextlevel].push(pnode->m_pLeft);
+      }
+      
+      if (pnode->m_pRight)
+      {
+        stackbt[nextlevel].push(pnode->m_pRight);
+      }
+    }
+    else
+    {
+      if (pnode->m_pRight)
+      {
+        stackbt[nextlevel].push(pnode->m_pRight);
+      }
+
+      if (pnode->m_pLeft)
+      {
+        stackbt[nextlevel].push(pnode->m_pLeft);
+      }
+    }
+
+    stackbt[current].pop();
+    if (stackbt[current].size() == 0)
+    {
+      printf("\n");
+
+      int tmp = current;
+      current = nextlevel;
+      nextlevel = tmp;
+
+      left_to_right = (-1) * left_to_right;
+    }
+  }
 }
 
 void Print2(BinaryTreeNode* pRoot)
@@ -116,9 +172,9 @@ void Print2(BinaryTreeNode* pRoot)
 	}
 }
 
-void Print(BinaryTreeNode* pRoot)
+void Print_interface(BinaryTreeNode* pRoot)
 {
-	return Print2(pRoot);
+	return Print(pRoot);
 }
 
 
@@ -147,7 +203,7 @@ void Test1()
     printf("5 7 9 11 \n\n");
 
     printf("Actual Result is: \n");
-    Print(pNode8);
+    Print_interface(pNode8);
     printf("\n");
 
     DestroyTree(pNode8);
