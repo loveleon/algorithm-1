@@ -68,9 +68,10 @@ void Print(BinaryTreeNode* pRoot)
   if (pRoot == NULL)
     return;
 
-  int left_to_right = 1;
+  //int left_to_right; // could be replaced by current
   int current = 0;
   int nextlevel = 1;
+  //some vars could be removed because of the double stack
   std::stack<BinaryTreeNode*> stackbt[2];
   stackbt[current].push(pRoot);
 
@@ -80,7 +81,7 @@ void Print(BinaryTreeNode* pRoot)
     pnode = stackbt[current].top();
     printf("%d ", pnode->m_nValue);
 
-    if (left_to_right > 0)
+    if (current == 0) // good taste
     {
       if (pnode->m_pLeft)
       {
@@ -113,8 +114,6 @@ void Print(BinaryTreeNode* pRoot)
       int tmp = current;
       current = nextlevel;
       nextlevel = tmp;
-
-      left_to_right = (-1) * left_to_right;
     }
   }
 }
