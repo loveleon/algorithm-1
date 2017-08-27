@@ -20,7 +20,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 
 // BST£ºBinary Search Tree£¬¶þ²æËÑË÷Ê÷
-bool VerifySquenceOfBST1(int sequence[], int length)
+bool VerifySquenceOfBST_org(int sequence[], int length)
 {
     if(sequence == nullptr || length <= 0)
         return false;
@@ -46,14 +46,46 @@ bool VerifySquenceOfBST1(int sequence[], int length)
     // ÅÐ¶Ï×ó×ÓÊ÷ÊÇ²»ÊÇ¶þ²æËÑË÷Ê÷
     bool left = true;
     if(i > 0)
-        left = VerifySquenceOfBST1(sequence, i);
+        left = VerifySquenceOfBST_org(sequence, i);
 
     // ÅÐ¶ÏÓÒ×ÓÊ÷ÊÇ²»ÊÇ¶þ²æËÑË÷Ê÷
     bool right = true;
     if(i < length - 1)
-        right = VerifySquenceOfBST1(sequence + i, length - i - 1);
+        right = VerifySquenceOfBST_org(sequence + i, length - i - 1);
 
     return (left && right);
+}
+
+// 2017/10/07
+bool VerifySquenceOfBST(int sequence[], int length)
+{
+  if (sequence == NULL || length <= 0)
+    return false; // need to confirm
+
+  int root = sequence[length - 1];
+  int i = 0;
+  for (i = 0; i < length - 1; i++)
+  {
+    if (sequence[i] > root)
+      break;
+  }
+
+  int j = i;
+  for (j = i; j < length - 1; j++)
+  {
+    if (sequence[j] < root)
+      return false;
+  }
+
+  bool lispost = true;
+  if (i > 0)
+    lispost = VerifySquenceOfBST(sequence, i);
+
+  bool rispost = true;
+  if (length - i - 1 > 0)
+    rispost = VerifySquenceOfBST(sequence + i, length - i - 1);
+
+  return (lispost && rispost);
 }
 
 // my code: the damn onsite in 2017.6.30 on the 2nd round of AI&R in MS, 
@@ -102,9 +134,9 @@ bool be_post(int arr[], int length)
 	return (left && right);
 }
 
-bool VerifySquenceOfBST(int sequence[], int length)
+bool VerifySquenceOfBST_interface(int sequence[], int length)
 {
-	return be_post(sequence, length);
+	return VerifySquenceOfBST(sequence, length);
 }
 
 // ====================²âÊÔ´úÂë====================
@@ -113,7 +145,7 @@ void Test(const char* testName, int sequence[], int length, bool expected)
     if(testName != nullptr)
         printf("%s begins: ", testName);
 
-    if(VerifySquenceOfBST(sequence, length) == expected)
+    if(VerifySquenceOfBST_interface(sequence, length) == expected)
         printf("passed.\n");
     else
         printf("failed.\n");
