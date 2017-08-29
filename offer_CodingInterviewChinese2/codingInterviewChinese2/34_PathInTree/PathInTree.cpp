@@ -17,9 +17,10 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 有路径。从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
 
 #include <cstdio>
-#include "..\Utilities\BinaryTree.h"
+#include "../Utilities/BinaryTree.h"
 #include <vector>
 
+#if 0
 void FindPath(BinaryTreeNode* pRoot, int expectedSum, std::vector<int>& path, int& currentSum);
 
 void FindPath(BinaryTreeNode* pRoot, int expectedSum)
@@ -67,6 +68,57 @@ void FindPath
     currentSum -= pRoot->m_nValue;
     path.pop_back();
 } 
+#else
+
+void FindPath
+(
+    BinaryTreeNode*   pRoot,        
+    int               expectedSum,  
+    std::vector<int>& path,         
+    int&              currentSum
+)
+{
+  if (pRoot == NULL)
+    return;
+  
+  currentSum += pRoot->m_nValue;
+  path.push_back(pRoot->m_nValue);
+
+  bool isleaf = false;
+  if (pRoot->m_pLeft == NULL && pRoot->m_pRight == NULL)
+    isleaf = true;
+
+  if (currentSum == expectedSum && isleaf)
+  {
+    printf("A path is found: ");
+    for (std::vector<int>::iterator it = path.begin(); it != path.end(); it++)
+    {
+      printf("%d ", *it);
+    }
+    printf("\n");
+    //return; //bug: not just one, but all 
+  }
+
+  if (pRoot->m_pLeft)
+    FindPath(pRoot->m_pLeft, expectedSum, path, currentSum);
+  if (pRoot->m_pRight)
+    FindPath(pRoot->m_pRight, expectedSum, path, currentSum);
+
+  //bug: can't ignor the code belows:
+  currentSum -= pRoot->m_nValue;
+  path.pop_back();
+}
+void FindPath(BinaryTreeNode* pRoot, int expectedSum)
+{
+    if(pRoot == nullptr)
+        return;
+
+    std::vector<int> path;
+    int currentSum = 0;
+    FindPath(pRoot, expectedSum, path, currentSum);
+}
+
+#endif
 
 // ====================测试代码====================
 void Test(char* testName, BinaryTreeNode* pRoot, int expectedSum)
