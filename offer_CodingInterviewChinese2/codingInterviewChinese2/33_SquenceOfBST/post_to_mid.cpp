@@ -62,7 +62,7 @@ BinaryTreeNode* ConstructCore
     return root;
 }
 
-void post_to_in(int arr[], int length)
+void post_to_in_first(int arr[], int length)
 {
 	int i = 0;
 	int mid = 0;
@@ -95,13 +95,51 @@ void post_to_in(int arr[], int length)
 	}
 
 	if (mid > 0)
-		post_to_in(arr, mid);
+		post_to_in_first(arr, mid);
 
 	if (mid < length - 1)
-		post_to_in(arr + mid + 1, length - mid - 1); // the bugfix: arr + mid + 1
-
+		post_to_in_first(arr + mid + 1, length - mid - 1); // the bugfix: arr + mid + 1
 }
 
+void post_to_in(int arr[], int length)
+{
+  if (arr == NULL || length <= 1)
+  {
+    return;
+  }
+
+  int root = arr[length - 1];
+  int i = 0;
+  for (i = 0; i < length - 1; i++)
+  {
+    if (arr[i] > root)
+      break;
+  }
+
+  int j = i;
+  int cur = root;
+  for (j = i; j < length; j++)
+  {
+    int tmp = arr[j];
+    arr[j] = cur;
+    cur = tmp;
+  }
+
+  if (i > 0)
+  {
+    post_to_in(arr, i);
+  }
+
+  if (length > i + 1)
+  {
+    post_to_in(arr + i + 1, length - i - 1);
+  }
+}
+
+void post_to_in_interface(int* postorder, int length)
+{
+  return post_to_in(postorder, length);
+}
 
 // ====================≤‚ ‘¥˙¬Î====================
 void Test(char* testName, int* postorder, int* real,int length)
@@ -114,12 +152,12 @@ void Test(char* testName, int* postorder, int* real,int length)
         printf("%d ", postorder[i]);
     printf("\n");
 
-    printf("The real in  sequence is: ");
+    printf("The real inorder sequence is: ");
     for(int i = 0; i < length; ++ i)
         printf("%d ", real[i]);
     printf("\n");
 
-	post_to_in(postorder, length);
+    post_to_in_interface(postorder, length);
 
     printf("The inordered sequence is: ");
     for(int i = 0; i < length; ++ i)
@@ -137,7 +175,7 @@ void Test1()
 {
     const int length = 7;
     int inorder[length] = {4, 6, 8, 10, 12, 14, 16};
-	int post [length]   = {4, 8, 6, 12, 16, 14, 10};
+	  int post [length]   = {4, 8, 6, 12, 16, 14, 10};
 	
     Test("Test1", post, inorder, length);
 }
