@@ -17,8 +17,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 不能创建任何新的结点，只能调整树中结点指针的指向。
 
 #include <cstdio>
-#include "..\Utilities\BinaryTree.h"
+#include "../Utilities/BinaryTree.h"
 
+#if 0
 void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList);
 
 BinaryTreeNode* Convert(BinaryTreeNode* pRootOfTree)
@@ -45,7 +46,7 @@ void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
     if (pCurrent->m_pLeft != nullptr)
         ConvertNode(pCurrent->m_pLeft, pLastNodeInList);
 
-    pCurrent->m_pLeft = *pLastNodeInList; 
+    pCurrent->m_pLeft = *pLastNodeInList;
     if(*pLastNodeInList != nullptr)
         (*pLastNodeInList)->m_pRight = pCurrent;
 
@@ -54,6 +55,48 @@ void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
     if (pCurrent->m_pRight != nullptr)
         ConvertNode(pCurrent->m_pRight, pLastNodeInList);
 }
+#else
+// need to feel the good taste again and again
+void ConvertNode(BinaryTreeNode* pNode, BinaryTreeNode** pLastNodeInList)
+{
+  if (pNode == NULL)
+    return;
+
+  BinaryTreeNode *pcur = pNode;
+
+  if (pcur->m_pLeft)
+  {
+    ConvertNode(pcur->m_pLeft, pLastNodeInList);
+  }
+
+  pcur->m_pLeft = *pLastNodeInList;
+  if (*pLastNodeInList != NULL)
+    (*pLastNodeInList)->m_pRight = pcur;
+
+  *pLastNodeInList = pcur;
+
+  if (pcur->m_pRight)
+  {
+    ConvertNode(pcur->m_pRight, pLastNodeInList);
+  }
+}
+
+BinaryTreeNode* Convert(BinaryTreeNode* pRootOfTree)
+{
+  BinaryTreeNode *nodeinlist = NULL;
+  ConvertNode(pRootOfTree, &nodeinlist);
+
+  BinaryTreeNode* cur    = nodeinlist;
+  while (cur != NULL && cur->m_pLeft != NULL)
+  {
+    cur = cur->m_pLeft;
+  }
+
+  return cur;
+}
+
+#endif
+
 
 // ====================测试代码====================
 void PrintDoubleLinkedList(BinaryTreeNode* pHeadOfList)
