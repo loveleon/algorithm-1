@@ -18,6 +18,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <cstdio>
 #include "../Utilities/BinaryTree.h"
 
+#if 0
 const BinaryTreeNode* KthNodeCore(const BinaryTreeNode* pRoot, unsigned int& k);
 
 const BinaryTreeNode* KthNode(const BinaryTreeNode* pRoot, unsigned int k)
@@ -48,9 +49,50 @@ const BinaryTreeNode* KthNodeCore(const BinaryTreeNode* pRoot, unsigned int& k)
 
     return target;
 }
+#else
+// the inOrder 
+const BinaryTreeNode* KthNodeCore(const BinaryTreeNode* proot, unsigned int& k)
+{
+	const BinaryTreeNode* ptarget = NULL;
+
+	if (proot->m_pLeft)
+	{
+		ptarget = KthNodeCore(proot->m_pLeft, k);
+	}
+
+	if (ptarget == NULL)
+	{
+		if (k == 1)
+		{
+		  ptarget = proot;
+		  return ptarget;
+		}
+
+		k--;
+	}
+
+	if (ptarget == NULL && proot->m_pRight)
+	{
+		ptarget = KthNodeCore(proot->m_pRight, k);
+	}
+
+	return ptarget;
+}
+
+const BinaryTreeNode* KthNode(const BinaryTreeNode* pRoot, unsigned int k)
+{
+	if (pRoot == NULL || k == 0)
+		return NULL;
+
+	return KthNodeCore(pRoot, k);
+}
+
+#endif
+
 
 // ====================≤‚ ‘¥˙¬Î====================
-void Test(const char* testName, const BinaryTreeNode* pRoot, unsigned int k, bool isNull, int expected)
+void Test(const char* testName, const BinaryTreeNode* pRoot, 
+				unsigned int k, bool isNull, int expected)
 {
     if(testName != nullptr)
         printf("%s begins: ", testName);

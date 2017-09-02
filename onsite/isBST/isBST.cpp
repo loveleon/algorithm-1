@@ -66,7 +66,7 @@ class Checker {
 public:
 
 	/*方法一，将中序遍历结果保存到数组 T(n)=O(n) S(n)=O(n)*/
-	void inOrder(TreeNode *root,vector<int> &v)
+	void inOrder(TreeNode *root, vector<int> &v)
 	{
 		if (root == NULL)
 			return;
