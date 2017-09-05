@@ -36,6 +36,7 @@ int squares(int n) {
     return result;
 }
 
+#if 0
 bool isHappy(int n) {
 
     if (n==1) return true;
@@ -54,7 +55,31 @@ bool isHappy(int n) {
 
     return true;
 }
+#else
+bool isHappy(int n) 
+{
+	if (n == 0)
+		return false;
 
+	if (n == 1)
+		return true;
+
+	std::map<int, bool> map_n;
+
+	while (n != 1)
+	{
+		n = squares(n);
+
+		if (map_n.find(n) != map_n.end())
+			return false;
+
+		map_n[n] = true;
+	}
+
+	return true;
+}
+
+#endif
 
 int main(int argc, char** argv) 
 {
