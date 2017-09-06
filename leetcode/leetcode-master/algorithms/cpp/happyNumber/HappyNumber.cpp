@@ -83,7 +83,7 @@ bool isHappy(int n)
 
 int main(int argc, char** argv) 
 {
-    int n = 2;
+    int n = 19; // 2 is't, 19 is
     if (argc > 1){
         n = atoi(argv[1]);
     }
