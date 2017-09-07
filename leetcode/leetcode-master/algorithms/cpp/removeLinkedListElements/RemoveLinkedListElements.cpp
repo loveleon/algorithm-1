@@ -29,7 +29,7 @@ public:
         dummy.next = head;
         ListNode *p = &dummy;
         
-        while( p->next) {
+        while (p->next) {
             if (p->next->val == val) {
             		delete(p->next);
                 p->next = p->next->next;
@@ -39,6 +39,27 @@ public:
         }
         
         return dummy.next;
+    }
+
+    ListNode* removeElements_org_1(ListNode* head, int val) {
+      static ListNode dummy(-1);
+      dummy.next = head;
+      ListNode *p = &dummy;
+      
+      while (p)
+      {
+				if (p->next == NULL)
+					break;
+    		
+        if (p->next->val == val) {
+      		delete(p->next);
+          p->next = p->next->next;
+        }
+				else
+        	p = p->next;
+      }
+      
+      return dummy.next;
     }
 
 //The more you understand the darkness of night, the better we know the light of day
