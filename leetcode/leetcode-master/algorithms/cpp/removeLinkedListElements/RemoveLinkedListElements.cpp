@@ -31,8 +31,9 @@ public:
         
         while (p->next) {
             if (p->next->val == val) {
+            		ListNode *tmp = p->next->next;
             		delete(p->next);
-                p->next = p->next->next;
+                p->next = tmp;
             }else{
                 p = p->next;
             }
@@ -52,11 +53,12 @@ public:
 					break;
     		
         if (p->next->val == val) {
+        	ListNode *tmp = p->next->next;
       		delete(p->next);
-          p->next = p->next->next;
+          p->next = tmp;
         }
 				else
-        	p = p->next;
+        	p = p->next; // bug: just in else branch, not in all branch
       }
       
       return dummy.next;
@@ -89,13 +91,14 @@ public:
 			if (node->next == NULL)
 				break;
   		
-			if (node->next.val == val)
+			if (node->next->val == val)
 			{
+				ListNode* tmp = node->next->next;
 				delete(node->next);
-				node->next = node->next->next;
+				node->next = tmp;
 			}
-
-			node = node->next;
+			else	
+				node = node->next; // bug: just in else branch, not in all branch
   	}
 
 		return new_head;
@@ -111,6 +114,8 @@ public:
 6
 [6,6,6,3,4,5,6]
 6
+[3,4,6,6,6,5,6]
+6
 []
 6
 [6]
@@ -119,6 +124,7 @@ public:
 the expected answer:
 [1,2,3,4,5]
 [2,3,4,5]
+[3,4,5]
 [3,4,5]
 []
 []
