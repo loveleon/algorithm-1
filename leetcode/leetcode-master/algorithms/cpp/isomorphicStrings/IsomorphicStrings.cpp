@@ -25,7 +25,7 @@
  *               
  **********************************************************************************/
 
-
+#if 0
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
@@ -50,3 +50,34 @@ public:
         return true;
     }
 };
+
+#else
+class Solution {
+public:
+  bool isIsomorphic(string s, string t)
+  {
+		std::map<char, char> m;
+
+		if (s.size() != t.size())
+			return false;
+
+		int i = 0;
+		for (i = 0; i < s.size(); i++)
+		{
+			if (m.find(s[i]) == m.end())
+			{
+				m[s[i]] = t[i];
+			}
+			else
+			{
+				if (m[s[i]] != t[i])
+					return false;
+			}
+		}
+
+		return true;
+  }
+};
+
+
+#endif
