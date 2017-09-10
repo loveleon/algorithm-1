@@ -23,6 +23,8 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+#if 0
 class Solution {
 public:
     ListNode* reverseList_iteratively(ListNode* head) {
@@ -48,3 +50,28 @@ public:
         return reverseList_recursively(head);
     }
 };
+
+#else
+
+class Solution {
+public:
+  ListNode* reverseList(ListNode* head)
+  {
+		if (head == NULL)
+			return NULL;
+
+		ListNode* cur1 = NULL;
+		ListNode* cur2 = head;
+		while (cur2)
+		{
+			ListNode* tmp = cur2->next;
+			cur2->next = cur1;
+			cur1 = cur2;
+			cur2 = tmp;
+		}
+
+		return cur1;
+  }
+};
+
+#endif
