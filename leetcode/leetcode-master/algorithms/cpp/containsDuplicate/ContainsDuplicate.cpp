@@ -10,7 +10,7 @@
  *               
  **********************************************************************************/
 
-
+#if 0
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
@@ -22,3 +22,30 @@ public:
         return false;
     }
 };
+
+#else
+
+class Solution {
+public:
+  bool containsDuplicate(vector<int>& nums)
+  {
+		std::map<int, bool> m;
+		
+		int i = 0;
+		for (i = 0; i < nums.size(); i++)
+		{
+			if (m.find(nums[i]) != m.end())
+			{
+				return true;
+			}
+			else
+			{
+				m[nums[i]] = true;
+			}
+		}
+
+		return false;
+  }
+};
+
+#endif
