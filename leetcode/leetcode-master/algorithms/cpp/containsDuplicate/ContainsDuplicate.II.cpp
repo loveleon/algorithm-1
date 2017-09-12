@@ -11,6 +11,7 @@
  *               
  **********************************************************************************/
 
+#if 0
 class Solution {
 public:
     bool containsNearbyDuplicate(vector<int>& nums, int k) {
@@ -26,3 +27,47 @@ public:
     }
 };
 
+#else
+
+class Solution {
+public:
+  bool containsNearbyDuplicate(vector<int>& nums, int k)
+  {
+		std::map<int, int> m;
+
+		int i = 0;
+		for (i = 0; i < nums.size(); i++)
+		{
+			if ((m.find(nums[i]) != m.end()) && i - m[nums[i]] <= k)
+				return true;
+
+			m[nums[i]] = i; 
+		}
+		
+		return false;
+  }
+};
+
+
+
+#endif
+
+/*
+test:
+
+[1,2,3,4,1,5]
+4
+[1,2,3,4,1,5]
+5
+[1,2,1,4,1,5]
+3
+[]
+0
+
+true
+true
+true
+false
+
+
+*/
