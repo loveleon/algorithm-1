@@ -36,6 +36,8 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+#if 0
 class Solution {
 public:
 
@@ -68,4 +70,32 @@ public:
         return invertTree_recursive(root);    
     }
 };
+#else
 
+class Solution {
+public:
+  TreeNode* invertTree(TreeNode* root)
+  {
+		if (root == NULL)
+			return NULL;
+		if (root->left == NULL && root->right == NULL)
+			return root;
+
+		TreeNode* node = root->left;
+		root->left = root->right;
+		root->right = node;
+
+		TreeNode* left = NULL;
+		if (root->left)
+			left = invertTree(root->left);
+
+		TreeNode* right = NULL;
+		if (root->right)
+			right = invertTree(root->right);
+
+		return root;
+  }
+};
+
+
+#endif

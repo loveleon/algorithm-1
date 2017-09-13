@@ -65,6 +65,7 @@ void MirrorIteratively(BinaryTreeNode* pRoot)
     }
 }
 
+// my code 
 // the org NULL handling is verbose
 //    if(... || (pNode->m_pLeft == nullptr && pNode->m_pRight == nullptr))
 //        return;

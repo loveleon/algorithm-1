@@ -33,15 +33,16 @@ class Solution {
 public:
   bool containsNearbyDuplicate(vector<int>& nums, int k)
   {
-		std::map<int, int> m;
+		std::map<int, int> m; //<num, index>
 
 		int i = 0;
 		for (i = 0; i < nums.size(); i++)
 		{
-			if ((m.find(nums[i]) != m.end()) && i - m[nums[i]] <= k)
+			int num = nums[i];
+			if ((m.find(num) != m.end()) && i - m[num] <= k)
 				return true;
 
-			m[nums[i]] = i; 
+			m[num] = i; 
 		}
 		
 		return false;
