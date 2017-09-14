@@ -105,7 +105,7 @@ void DeleteDuplication(ListNode** pphead)
       else
         pprenode->m_pNext = pnext;
 
-      pnode = pnext; //need to care
+      pnode = pnext; //bug trap: need to care
     }
   }
 }

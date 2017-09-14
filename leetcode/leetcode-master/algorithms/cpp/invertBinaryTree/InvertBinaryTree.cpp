@@ -71,7 +71,7 @@ public:
     }
 };
 #else
-
+// the return type is verbose, TreeNode* could be replaced by void 
 class Solution {
 public:
   TreeNode* invertTree(TreeNode* root)
