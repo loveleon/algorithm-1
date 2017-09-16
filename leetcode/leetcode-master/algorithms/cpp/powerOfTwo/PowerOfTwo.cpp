@@ -34,7 +34,18 @@ public:
     bool isPowerOfTwo02(int n) {
         return n<=0 ? false : (n & (n-1)) == 0;
     }
-    
+
+	bool isPowerOfTwo03(int n)
+	{	
+		if (n <= 0)
+			return false;
+
+		if ((n & (n - 1)) == 0)
+			return true;
+		else
+			return false;
+	}
+
     bool isPowerOfTwo(int n) {
         if (random()%2){
             return isPowerOfTwo02(n);
@@ -42,3 +53,28 @@ public:
         return isPowerOfTwo01(n);
     }
 };
+
+/*
+
+0
+1
+2
+4
+8
+9
+2147483647
+2147483648
+-1
+-2
+
+false
+true
+true
+true
+true
+false
+false
+false
+false
+false
+*/
