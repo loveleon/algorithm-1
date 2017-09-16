@@ -104,10 +104,11 @@ void FindPath
   if (pRoot->m_pRight)
     FindPath(pRoot->m_pRight, expectedSum, path, currentSum);
 
-  //bug: can't ignor the code belows:
+  //bug trap: can't ignor the code below:
   currentSum -= pRoot->m_nValue;
   path.pop_back();
 }
+
 void FindPath(BinaryTreeNode* pRoot, int expectedSum)
 {
     if(pRoot == nullptr)

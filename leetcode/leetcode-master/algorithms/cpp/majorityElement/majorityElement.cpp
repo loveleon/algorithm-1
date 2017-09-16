@@ -45,7 +45,7 @@ int majorityElement(vector<int> &num) {
 
 int majorityElement(vector<int> &num)
 {
-    int majority;
+	int majority;
 	int count = 0;
 	int i = 0;
 	

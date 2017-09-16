@@ -63,29 +63,46 @@ using namespace std;
 
 #define INT_MAX     2147483647
 
-class Solution {
-    public:
-        int trailingZeroes1(int n) {
-            int result = 0;
-            //To avoid the integer overflow ( e.g. 'n >=1808548329' )
-            for(long long i=5; n/i>0 && i <= INT_MAX; i*=5){
-                result += (n/i);
-            }
-            return result;
+class Solution
+{
+public:
+    int trailingZeroes1(int n) {
+        int result = 0;
+        //To avoid the integer overflow ( e.g. 'n >=1808548329' )
+        for(long long i=5; n/i>0 && i <= INT_MAX; i*=5){
+            result += (n/i);
         }
+        return result;
+    }
 
-        // Alternative implementation which naturally avoid integer overflow issue.
-        int trailingZeroes2(int n) {
-            int sum=0;
-            int tmp=0;
-            while(n/5>0)
-            {
-                tmp=n/5;
-                sum+=tmp;
-                n=tmp;
-            }
-            return sum;
+    // Alternative implementation which naturally avoid integer overflow issue.
+    int trailingZeroes2(int n) {
+        int sum=0;
+        int tmp=0;
+        while(n/5>0)
+        {
+            tmp=n/5;
+            sum+=tmp;
+            n=tmp;
         }
+        return sum;
+    }
+
+	// my code
+	int trailingZeroes3(int n)
+	{
+		int sum = 0;
+		int cur = 0;
+		
+		while ((n/5) > 0)
+		{
+			cur = (n/5); 
+			sum += cur;
+			n = cur;
+		}
+		
+		return sum;
+	}
 };
 
 // 2 3 4 5 = 120 
@@ -93,6 +110,6 @@ int main()
 {
 	Solution s;
 	int n = 20;
-	
-	cout << s.trailingZeroes1(n) << endl;
+
+	cout << s.trailingZeroes3(n) << endl;
 }
