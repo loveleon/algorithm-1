@@ -36,6 +36,7 @@ public:
     }
 
     // Removes the element from in front of queue.
+    // next way: return int, it is the top, such as implement below
     void pop(void) {
         transfer(s1, s2);
         s2.pop();
@@ -64,3 +65,56 @@ private:
     }
 };
 
+
+class MyQueue {
+public:
+  /** Initialize your data structure here. */
+  MyQueue()
+  {
+		
+  }
+  
+  /** Push element x to the back of queue. */
+  void push(int x)
+  {
+		s1.push(x);
+  }
+  
+  /** Removes the element from in front of queue and returns that element. */
+  int pop()
+  {
+		transfer(s1, s2);
+		int top = s2.top();
+		s2.pop();
+		transfer(s2, s1);
+		return top;
+  }
+  
+  /** Get the front element. */
+  int peek()
+  {
+		transfer(s1, s2);
+		int peek = s2.top();
+		transfer(s2, s1);
+		return peek;
+  }
+  
+  /** Returns whether the queue is empty. */
+  bool empty()
+  {
+		return s1.empty();
+  }
+
+private:
+	std::stack<int> s1;
+	std::stack<int> s2;
+
+	void transfer(std::stack<int>& from, std::stack<int>& to)
+	{
+		while (from.size())
+		{
+			to.push(from.top());
+			from.pop();
+		}
+	}
+};
