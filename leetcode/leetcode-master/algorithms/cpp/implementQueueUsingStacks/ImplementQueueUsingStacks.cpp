@@ -66,6 +66,7 @@ private:
 };
 
 
+// my code 2017/10/16
 class MyQueue {
 public:
   /** Initialize your data structure here. */
@@ -106,8 +107,8 @@ public:
   }
 
 private:
-  std::stack<int> s1;
-  std::stack<int> s2;
+  std::stack<int> s1; // input to the stack, if the queue isn't empty, the stack isn't empty
+  std::stack<int> s2; // output from the stack, after the operation, the stack is empty,
 
   void transfer(std::stack<int>& from, std::stack<int>& to)
   {
