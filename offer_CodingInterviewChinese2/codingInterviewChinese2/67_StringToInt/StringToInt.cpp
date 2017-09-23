@@ -17,6 +17,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 能使用atoi或者其他类似的库函数。
 
 #include <cstdio>
+#define nullptr NULL
 
 long long StrToIntCore(const char* str, bool minus);
 
