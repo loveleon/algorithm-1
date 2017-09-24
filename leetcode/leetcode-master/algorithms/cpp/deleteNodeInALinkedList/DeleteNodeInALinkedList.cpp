@@ -20,6 +20,7 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+#if 0
 class Solution {
 public:
     //becasue the deleted is not the tail.
@@ -30,4 +31,18 @@ public:
     }
 };
 
+#else
+class Solution {
+public:
+  void deleteNode(ListNode* node)
+  {
+    if (node)
+    {
+      node->val  = node->next->val;
+      node->next = node->next->next;
+    }
+  }
+};
+
+#endif
 
