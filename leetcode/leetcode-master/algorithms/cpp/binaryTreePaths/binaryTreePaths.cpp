@@ -31,6 +31,8 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+ // 深度优先搜索(DFS)、广度优先搜索(BFS)
+ 
 class Solution {
 public:
     vector<string> TreePaths;
@@ -92,4 +94,45 @@ public:
         binaryTreePathsHelper(root, solution, result);
         return result;
     }
+};
+
+
+class Solution {
+public:
+  void dfs(TreeNode* root, std::vector<int> val, vector<string>& path)
+  {
+    if (root == NULL)
+      return;
+
+    val.push_back(root->val);
+    if (root->left == NULL && root->right == NULL)
+    {
+      int i = 0;
+      string path_leaf;
+      for (i = 0; i < val.size(); i++)
+      {
+        if (i != val.size() - 1 )
+          path_leaf += to_string(val[i]) + "->";
+        else
+          path_leaf += to_string(val[i]);
+      }
+      
+      path.push_back(path_leaf);
+    }
+
+    dfs(root->left, val, path);
+    dfs(root->right, val, path);
+
+    //val.pop_back(); // bug trap: if the in param is &val, delete the node
+  }
+
+  vector<string> binaryTreePaths(TreeNode* root)
+  {
+    vector<int> val;
+    vector<string> path;
+
+    dfs(root, val, path);
+    
+    return path;
+  }
 };
