@@ -85,4 +85,16 @@ class Solution {
             return num - 9 * ((num - 1)/9);
         }
 
+  // my code
+  int addDigits06(int num)
+  {
+    if (num < 9)
+      return num;
+
+    int n = num % 9;
+    if (n == 0)
+      return 9;
+    else
+      return n;
+  }
 };
