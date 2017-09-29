@@ -85,3 +85,29 @@ public:
     }
 
 };
+
+class Solution {
+public:
+  void moveZeroes(vector<int>& nums)
+  {
+    int len = nums.size();
+    int i = 0;
+    for (i = 0; i < len;) // bug trap 1:
+    {
+      if (nums[i] == 0)
+      {
+        int j = i;
+        for (j = i; j < len -1; j++)
+        {
+          nums[j] = nums[j + 1]; 
+        }
+
+        nums[len - 1] = 0;
+        len--;
+      }
+      else
+        i++; // bug trap 1.1:
+    }
+    
+  }
+};
