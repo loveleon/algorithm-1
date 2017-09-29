@@ -14,9 +14,11 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #ifndef __LIST_H__
 #define __LIST_H__
 
-#include "list.h"
+//#include "list.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+#define nullptr NULL
 
 struct ListNode
 {

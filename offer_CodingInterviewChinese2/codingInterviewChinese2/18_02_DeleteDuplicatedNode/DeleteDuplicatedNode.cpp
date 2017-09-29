@@ -17,7 +17,9 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 结点被删除之后，链表如图3.4（b）所示。
 
 #include <cstdio>
-#include "../Utilities/list.h"
+#include <string>
+#include "../Utilities/List.h"
+using namespace std;
 
 void DeleteDuplication(ListNode** pHead)
 {
@@ -63,6 +65,30 @@ void DeleteDuplication(ListNode** pHead)
 
 // ====================测试代码====================
 void Test(char* testName, ListNode** pHead, int* expectedValues, int expectedLength)
+{
+    if(testName != nullptr)
+        printf("%s begins: ", testName);
+
+    DeleteDuplication(pHead);
+
+    int index = 0;
+    ListNode* pNode = *pHead;
+    while(pNode != nullptr && index < expectedLength)
+    {
+        if(pNode->m_nValue != expectedValues[index])
+            break;
+
+        pNode = pNode->m_pNext;
+        index++;
+    }
+
+    if(pNode == nullptr && index == expectedLength)
+        printf("Passed.\n");
+    else
+        printf("FAILED.\n");
+}
+
+void Test(string *testName, ListNode** pHead, int* expectedValues, int expectedLength)
 {
     if(testName != nullptr)
         printf("%s begins: ", testName);
