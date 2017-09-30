@@ -72,3 +72,51 @@ public:
     }
 };
 
+class Solution {
+public:
+
+  std::vector<string> str_to_strs(string str, char delimiter)
+  {
+    vector<string> internal;
+    stringstream ss(str); // Turn the string into a stream.
+    string tok;
+
+    while(getline(ss, tok, delimiter)) {
+      internal.push_back(tok);
+    }
+
+    return internal;
+  }
+
+  bool wordPattern(string pattern, string str)
+  {
+    std::map<char, string> m;
+
+    std::vector<string> strs;
+    strs = str_to_strs(str, ' ');
+
+    if (pattern.length() != strs.size())
+      return false;
+
+    std::map<char, string>::iterator it;
+    int i = 0;
+    for (i = 0; i < pattern.length(); i++)
+    {
+      it = m.find(pattern[i]);
+      if (it != m.end())
+      {
+        if ((*it).second != strs[i])
+        {
+          return false;
+        }
+      }
+      else
+      {
+        m.insert(std::pair<char, string>(pattern[i], strs[i]));
+      }
+    }
+
+    return true;
+  }
+};
+
