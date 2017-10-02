@@ -100,7 +100,7 @@ public:
 
     std::map<char, string>::iterator it;
     int i = 0;
-    for (i = 0; i < pattern.length(); i++)
+    for (i = 0; i < pattern.length(); i++)//the same to pattern.size()
     {
       it = m.find(pattern[i]);
       if (it != m.end())
