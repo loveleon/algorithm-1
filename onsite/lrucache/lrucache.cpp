@@ -2,7 +2,7 @@
  * System design: LRU cache (least recently used).
  *
  * zhiangli028@gmail.com
- * Oct 8th, 2016
+ *
  */
 
 #include<iostream>
@@ -13,7 +13,7 @@ using namespace std;
 /**
  * Definition of cachelist node, it's double linked list node.
  */
-struct CacheNode {
+struct CacheNode{
   int key;
   int value;
   CacheNode *pre, *next;
@@ -113,10 +113,11 @@ public:
 int main(int argc, char **argv)
 {
   LRUCache *lruCache = new LRUCache(2);
-  lruCache->set(2, 1);
+  lruCache->set(2, 2);
   lruCache->set(1, 1);
   cout << lruCache->get(2) << endl;
-  lruCache->set(4, 1);
+  lruCache->set(4, 4);
   cout << lruCache->get(1) << endl;
   cout << lruCache->get(2) << endl;
+  cout << lruCache->get(4) << endl;
 }

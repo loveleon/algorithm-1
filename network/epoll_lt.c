@@ -9,7 +9,7 @@ int main()
     struct epoll_event event, events[5];
     epfd = epoll_create(1);
     event.data.fd = STDIN_FILENO;
-    event.events = EPOLLIN;  // LT是默认模式
+    event.events = EPOLLIN;  // LT is default mode
     epoll_ctl(epfd, EPOLL_CTL_ADD, STDIN_FILENO, &event);
     while (1) {
         nfds = epoll_wait(epfd, events, 5, -1);
