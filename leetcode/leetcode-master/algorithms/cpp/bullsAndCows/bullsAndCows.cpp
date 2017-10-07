@@ -87,4 +87,35 @@ public:
         
         return to_string(bull) + "A" + to_string(cow) + "B";
     }
+
+
+  string getHint03(string secret, string guess) {
+    int sm[10] = {0};
+    int a_num = 0;
+    int b_num = 0;
+
+    int i = 0;
+    for (i = 0; i < secret.size(); i++)
+    {
+      sm[secret[i] - '0']++;
+    }
+
+    for (i = 0; i < guess.size(); i++)
+    {
+      if (secret[i] == guess[i])
+      {
+        a_num++;
+      }
+      else
+      {
+        if (sm[guess[i] - '0'] > 0)
+        {
+          b_num++;
+          sm[guess[i] - '0']--;
+        }
+      }
+    }
+
+    return to_string(a_num) + "A" + to_string(b_num) + "B";
+  }
 };
