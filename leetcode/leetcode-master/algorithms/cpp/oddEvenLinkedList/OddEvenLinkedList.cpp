@@ -41,7 +41,7 @@ public:
         while(p && (pNext=p->next)) {
             
             p->next = pNext->next;
-            pNext->next = pOdd->next;
+            pNext->next = pOdd->next; //good
             pOdd->next = pNext;
             
             p = p->next;
@@ -50,4 +50,29 @@ public:
         }
         return head;
     }
+};
+
+
+class Solution01 {
+public:
+  ListNode* oddEvenList(ListNode* head)
+  {
+    if (head == NULL)
+      return NULL;
+    ListNode *od = head;
+    ListNode *p1 = head->next;
+    ListNode *p2 = NULL;
+
+    while (p1 && (p2 = p1->next))
+    {
+      p1->next = p2->next;
+      p2->next = od->next; // bug trap: right side can't be p1
+      od->next = p2;
+
+      p1 = p1->next;
+      od = od->next;
+    }
+
+    return head;
+  }
 };

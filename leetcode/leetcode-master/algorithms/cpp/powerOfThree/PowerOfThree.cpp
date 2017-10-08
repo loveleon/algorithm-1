@@ -49,7 +49,8 @@ public:
         if (power.size()==0) init(power);
         return power.find(n) != power.end();
     }
-    
+
+    // get one way in my thought
     bool isPowerOfThree_loop(int n) {
         for(;n>0;n /= 3){
             if (n==1 || n==3) return true;
