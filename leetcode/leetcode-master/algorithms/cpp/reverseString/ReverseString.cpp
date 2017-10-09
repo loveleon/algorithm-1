@@ -22,3 +22,22 @@ public:
         return s;
     }
 };
+
+class Solution01 {
+public:
+  string reverseString(string s)
+  {
+    int i = 0;
+    int len = s.size();
+    
+    for (i = 0; i < (len / 2); i++)
+    {
+      char tmp = s[i];
+      s[i] = s[len - i - 1];
+      s[len - i - 1] = tmp;
+    }
+
+    return s;
+  }
+};
+
