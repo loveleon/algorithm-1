@@ -41,16 +41,16 @@ public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
         sort(nums1.begin(), nums1.end());//we sort both vectors in order to intersect
         sort(nums2.begin(), nums2.end());//them later in O(N + M), where N = nums1.size()
-        vector <int> solution;                                         //M = nums2.size() 
+        vector <int> solution;                              //M = nums2.size() 
         int index = 0;
         bool finished = false;
-        for(int i = 0; i < nums1.size() && !finished; i++)
+        for (int i = 0; i < nums1.size() && !finished; i++)
         {
-            while(index < nums2.size() && nums1[i] > nums2[index])//we skip over the
+            while (index < nums2.size() && nums1[i] > nums2[index])//we skip over the
                 index++;//smaller elements in nums2
-            if(index == nums2.size())//we have reached the end of nums2 so we have no more
+            if (index == nums2.size())//we have reached the end of nums2 so we have no more
                 finished = true;//elements to add to the intersection
-            else if(nums1[i] == nums2[index])//we found a common element
+            else if (nums1[i] == nums2[index])//we found a common element
             {
                 solution.push_back(nums1[i]);
                 index++;
@@ -58,4 +58,13 @@ public:
         }
         return solution;
     }
+};
+
+//Author: lizhiang
+class Solution {
+public:
+  vector<int> intersect(vector<int>& nums1, vector<int>& nums2)
+  {
+    
+  }
 };
