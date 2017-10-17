@@ -58,7 +58,7 @@ BinaryTreeNode* GetNext_org(BinaryTreeNode* pNode)
 }
 
 // code again 2017/10/06
-BinaryTreeNode* GetNext(BinaryTreeNode* pnode)
+BinaryTreeNode* GetNext_1(BinaryTreeNode* pnode)
 {
   if (pnode->m_pRight!= NULL)
   {
@@ -81,9 +81,8 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pnode)
   }
 }
 
-
 // DIY
-BinaryTreeNode* GetNext2(BinaryTreeNode *pNode)
+BinaryTreeNode* GetNext_2(BinaryTreeNode *pNode)
 {
     BinaryTreeNode* tmp  = NULL;
     BinaryTreeNode* tmp1 = NULL; 
@@ -114,6 +113,40 @@ BinaryTreeNode* GetNext2(BinaryTreeNode *pNode)
 
         return NULL;
     }
+}
+
+// lizhiang 2018/04/30
+BinaryTreeNode* GetNext(BinaryTreeNode* pnode)
+{
+    if (pnode == NULL)
+        return NULL;
+
+    if (pnode->m_pRight != NULL)
+    {
+        BinaryTreeNode *pcur = pnode->m_pRight;
+        while (pcur->m_pLeft != NULL)
+        {
+            pcur = pcur->m_pLeft;
+        }
+        return pcur;
+    }
+    else if (pnode->m_pParent != NULL)
+    {
+        BinaryTreeNode *ppa = pnode->m_pParent;
+        BinaryTreeNode *pcu = pnode;
+        while (ppa->m_pParent && ppa->m_pRight == pcu)
+        {
+            pcu = ppa;
+            ppa = ppa->m_pParent;
+        }
+
+        if (ppa->m_pLeft == pcu)
+            return ppa;
+        else
+            return NULL;
+    }
+
+    return NULL;
 }
 
 // ==================== 辅助代码用来构建二叉树 ====================
