@@ -63,7 +63,7 @@ void DeleteDuplication_org(ListNode** pHead)
     }
 }
 
-void DeleteDuplication(ListNode** pphead)
+void DeleteDuplication_0(ListNode** pphead)
 {
   if (pphead == NULL | *pphead == NULL)
     return;
@@ -180,7 +180,6 @@ void DeleteDuplication_1(ListNode** pphead)
             pdel->m_nValue == value)
       {
         pnext = pdel->m_pNext;
-
         delete pdel;
         pdel = NULL;
 
@@ -203,6 +202,51 @@ void DeleteDuplication_1(ListNode** pphead)
   }
 }
 
+// lizhiang 2018/05/01
+void DeleteDuplication(ListNode** pphead)
+{
+    if (pphead == NULL || *pphead == NULL)
+        return;
+
+    ListNode *node  = *pphead;
+    ListNode *pre = NULL;
+    bool dup = false;
+    int value = 0;
+    
+    while (node != NULL) 
+    {
+        dup = false;
+        if (node->m_pNext != NULL && node->m_nValue == node->m_pNext->m_nValue)
+        {
+            dup = true;
+            value = node->m_nValue;
+        }
+        
+        if (dup)
+        {
+            ListNode *next;
+            while (node != NULL && node->m_nValue == value)
+            {
+                next = node->m_pNext;
+                delete node;
+                node = NULL;
+                node = next;
+            }
+
+            if (pre == NULL) 
+                *pphead = node;
+            else
+                pre->m_pNext = node;
+            
+            node = next;
+        }
+        else
+        {
+            pre = node;
+            node = node->m_pNext;
+        }
+    }
+}
 // ====================²âÊÔ´úÂë====================
 void Test(char* testName, ListNode** pHead, int* expectedValues, int expectedLength)
 {
