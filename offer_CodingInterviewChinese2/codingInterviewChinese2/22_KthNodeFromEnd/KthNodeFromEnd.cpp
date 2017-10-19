@@ -49,7 +49,7 @@ ListNode* FindKthToTail_org(ListNode* pListHead, unsigned int k)
     return pBehind;
 }
 
-ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
+ListNode* FindKthToTail_0(ListNode* pListHead, unsigned int k)
 {
 #if 1
   //adding the code is better although later code could hande the exception
@@ -81,6 +81,40 @@ ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
   return knode;
 }
 
+// lizhiang 2018/05/02
+ListNode* FindKthToTail(ListNode* pListHead, unsigned int k)
+{
+    if (pListHead == NULL)
+    {
+        return NULL;
+    }
+
+    if (k == 0)
+        return NULL;
+
+    ListNode *node = pListHead;
+    unsigned int n = k;
+    while (n > 0)   // node judge in the {} 
+    {
+        if (node != NULL)
+        {
+            node = node->m_pNext;
+            n--;
+        }
+        else
+            return NULL;
+    }
+
+    ListNode *node2 = node;
+    ListNode *node1 = pListHead;
+    while (node2 != NULL)
+    {
+        node1 = node1->m_pNext;
+        node2 = node2->m_pNext;
+    }
+
+    return node1;
+}
 
 // ====================测试代码====================
 // 测试要找的结点在链表中间
