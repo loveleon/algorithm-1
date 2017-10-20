@@ -79,8 +79,7 @@ void MirrorRecursively(BinaryTreeNode *pNode)
   if (pNode == NULL)
     return;
 
-  BinaryTreeNode* tmp;
-  tmp = pNode->m_pLeft;
+  BinaryTreeNode* tmp = pNode->m_pLeft;
   pNode->m_pLeft = pNode->m_pRight;
   pNode->m_pRight = tmp;
 
@@ -88,14 +87,7 @@ void MirrorRecursively(BinaryTreeNode *pNode)
   MirrorRecursively(pNode->m_pRight);
 }
 
-void MirrorIteratively_my(BinaryTreeNode* pRoot)
-{
-
-}
-
 #endif 
-
-
 
 // ====================测试代码====================
 // 测试完全二叉树：除了叶子节点，其他节点都有两个子节点
