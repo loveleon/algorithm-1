@@ -43,7 +43,7 @@ ListNode* Merge_org(ListNode* pHead1, ListNode* pHead2)
     return pMergedHead;
 }
 
-ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+ListNode* Merge_0(ListNode* pHead1, ListNode* pHead2)
 {
   if (pHead1 == NULL)
     return pHead2;
@@ -54,17 +54,46 @@ ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
   if (pHead1->m_nValue <= pHead2->m_nValue)
   {
     pmergelist = pHead1;
-    pmergelist->m_pNext = Merge(pHead1->m_pNext, pHead2);
+    pmergelist->m_pNext = Merge_0(pHead1->m_pNext, pHead2);
   }
   else
   {
     pmergelist = pHead2;
-    pmergelist->m_pNext = Merge(pHead2->m_pNext, pHead1);
+    pmergelist->m_pNext = Merge_0(pHead2->m_pNext, pHead1);
   }
 
   return pmergelist;
 }
 
+// lizhiang 2018/05/03
+ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+{
+    if (pHead1 == NULL) 
+    {
+        return pHead2;
+    }
+    else if (pHead2 == NULL)
+    {
+        return pHead1;
+    }
+
+    ListNode *p1 = pHead1;
+    ListNode *p2 = pHead2;
+    ListNode *mnode = NULL;
+
+    if (p1->m_nValue <= p2->m_nValue)
+    {
+        mnode = p1;
+        mnode->m_pNext = Merge(p1->m_pNext, p2);
+    }
+    else
+    {
+        mnode = p2;
+        mnode->m_pNext = Merge(p2->m_pNext, p1);
+    }
+
+    return mnode;
+}
 // ====================²âÊÔ´úÂë====================
 ListNode* Test(char* testName, ListNode* pHead1, ListNode* pHead2)
 {
