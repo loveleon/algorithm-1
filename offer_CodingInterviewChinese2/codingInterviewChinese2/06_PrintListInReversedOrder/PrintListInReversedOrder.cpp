@@ -15,7 +15,7 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 // 面试题6：从尾到头打印链表
 // 题目：输入一个链表的头结点，从尾到头反过来打印出每个结点的值。
 
-#include "..\Utilities\List.h"
+#include "../Utilities/List.h"
 #include <stack>
 
 void PrintListReversingly_Iteratively(ListNode* pHead)
@@ -37,16 +37,28 @@ void PrintListReversingly_Iteratively(ListNode* pHead)
     }
 }
 
-void PrintListReversingly_Recursively(ListNode* pHead)
+void PrintListReversingly_Recursively0(ListNode* pHead)
 {
     if(pHead != nullptr)
     {
         if (pHead->m_pNext != nullptr)
         {
-            PrintListReversingly_Recursively(pHead->m_pNext);
+            PrintListReversingly_Recursively0(pHead->m_pNext);
         }
  
         printf("%d\t", pHead->m_nValue);
+    }
+}
+
+void PrintListReversingly_Recursively(ListNode* pHead)
+{
+    if (pHead == NULL)
+        return ;
+    
+    if (pHead != NULL)
+    {
+        PrintListReversingly_Recursively(pHead->m_pNext);
+        printf("%d ", pHead->m_nValue);
     }
 }
 
