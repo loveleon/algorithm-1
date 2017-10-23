@@ -43,7 +43,7 @@ ListNode* ReverseList_org(ListNode* pHead)
 // the org is clean and good taste, need to learn
 ListNode* ReverseList(ListNode* phead)
 {
-  if (phead == NULL || phead->m_pNext == NULL)
+  if (phead == NULL)
     return NULL;
 
   ListNode* first  = phead;
@@ -63,6 +63,24 @@ ListNode* ReverseList(ListNode* phead)
   return first;
 }
 
+ListNode* ReverseList1(ListNode* phead)
+{
+    if (phead == NULL)
+        return NULL;
+
+    ListNode *p1 = phead;
+    ListNode *p2 = phead->m_pNext;
+    p1->m_pNext = NULL;
+    while (p2 != NULL)
+    {
+        ListNode *t = p2->m_pNext;
+        p2->m_pNext = p1;
+        p1 = p2;
+        p2 = t; 
+    }
+    
+    return p1;
+}
 // ====================²âÊÔ´úÂë====================
 ListNode* Test(ListNode* pHead)
 {
