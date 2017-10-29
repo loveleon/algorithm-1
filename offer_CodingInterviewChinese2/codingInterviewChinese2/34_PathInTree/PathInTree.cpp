@@ -68,7 +68,7 @@ void FindPath
     currentSum -= pRoot->m_nValue;
     path.pop_back();
 } 
-#else
+//#else
 
 void FindPath
 (
@@ -117,6 +117,52 @@ void FindPath(BinaryTreeNode* pRoot, int expectedSum)
     std::vector<int> path;
     int currentSum = 0;
     FindPath(pRoot, expectedSum, path, currentSum);
+}
+
+#else
+// lizhaing 2018/05/08
+void FindPathNode(BinaryTreeNode *root, int expectedSum, int currentSum, std::vector<int> &path)
+{
+    bool isLeaf = false;
+
+    if (root == NULL)
+        return;
+
+    int cur = root->m_nValue;
+    path.push_back(cur);
+    currentSum += cur;
+
+    if (root->m_pLeft == NULL && root->m_pRight == NULL)
+    {
+        isLeaf = true;
+    }
+
+    if (expectedSum == currentSum && isLeaf)
+    {
+        for (std::vector<int>::iterator it = path.begin(); it != path.end(); it++)
+        {
+            printf("%d ", *it);
+        }
+        printf("\n");
+    }
+
+    if (root->m_pLeft != NULL)
+        FindPathNode(root->m_pLeft, expectedSum, currentSum, path);
+
+    if (root->m_pRight != NULL)
+        FindPathNode(root->m_pRight, expectedSum, currentSum, path);
+
+    path.pop_back();
+}
+
+void FindPath(BinaryTreeNode* pRoot, int expectedSum)
+{
+    if (pRoot == NULL)
+        return;
+    std::vector<int> path;
+    int currentSum = 0;
+
+    FindPathNode(pRoot, expectedSum, currentSum, path);
 }
 
 #endif
