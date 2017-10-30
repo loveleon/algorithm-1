@@ -21,6 +21,32 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <deque>
 #include <queue>
 
+// lizhiang 2018/05/08
+void PrintFromTopToBottom(BinaryTreeNode* pRoot)
+{
+    if (pRoot == NULL)
+        return;
+
+    BinaryTreeNode *node = NULL;
+    std::deque<BinaryTreeNode *> level;
+    
+    level.push_back(pRoot);
+    while (level.size() > 0)
+    {
+        node = level.front();
+        level.pop_front();
+        
+        if (node != NULL)
+            printf("%d ", node->m_nValue);
+
+        if (node->m_pLeft != NULL)
+            level.push_back(node->m_pLeft);
+        
+        if (node->m_pRight != NULL)
+            level.push_back(node->m_pRight);
+    }
+}
+
 void PrintFromTopToBottom_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
@@ -45,7 +71,7 @@ void PrintFromTopToBottom_org(BinaryTreeNode* pRoot)
     }
 }
 
-void PrintFromTopToBottom(BinaryTreeNode* pRoot)
+void PrintFromTopToBottom1(BinaryTreeNode* pRoot)
 {
   if (pRoot == NULL)
     return;
