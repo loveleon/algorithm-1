@@ -21,6 +21,47 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 #include <queue>
 
+// lizhiang 2018/05/08
+void Print(BinaryTreeNode* pRoot)
+{
+    if (pRoot == NULL)
+        return;
+
+    BinaryTreeNode *node = NULL;
+    std::deque<BinaryTreeNode *> dq;
+    dq.push_back(pRoot);
+
+    int now = 1;
+    int next = 0;
+
+    while (dq.size() > 0)
+    {
+        node = dq.front();
+        printf("%d ", node->m_nValue);
+
+        if (node->m_pLeft != NULL)
+        {
+            dq.push_back(node->m_pLeft);
+            next++;
+        }
+
+        if (node->m_pRight != NULL)
+        {
+            dq.push_back(node->m_pRight);
+            next++;
+        }
+        
+        dq.pop_front();
+        now--;
+        if (now == 0)
+        {
+            printf("\n");
+            now = next;
+            next = 0;
+        }
+    }
+}
+
 void Print_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
@@ -57,7 +98,7 @@ void Print_org(BinaryTreeNode* pRoot)
     }
 }
 
-void Print(BinaryTreeNode* pRoot)
+void Print1(BinaryTreeNode* pRoot)
 {
   if (pRoot == NULL)
     return;
