@@ -19,6 +19,26 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include <cstdio>
 #include "../Utilities/BinaryTree.h"
 
+// lizhiang 2018/05/14
+int TreeDepth(const BinaryTreeNode* pRoot)
+{
+    if (pRoot == NULL)
+        return 0;
+
+    int depthl = 0;
+    int depthr = 0;
+    int max = 0;
+    if (pRoot->m_pLeft != NULL)
+        depthl = TreeDepth(pRoot->m_pLeft);
+
+    if (pRoot->m_pRight != NULL)
+        depthr = TreeDepth(pRoot->m_pRight);
+
+    max = depthl > depthr ? depthl : depthr;
+
+    return max + 1;
+}
+
 int TreeDepth_org(const BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
@@ -30,7 +50,7 @@ int TreeDepth_org(const BinaryTreeNode* pRoot)
     return (nLeft > nRight) ? (nLeft + 1) : (nRight + 1);
 }
 
-int TreeDepth(const BinaryTreeNode* pRoot)
+int TreeDepth1(const BinaryTreeNode* pRoot)
 {
 	if (pRoot == NULL)
 		return 0;
