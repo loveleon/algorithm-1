@@ -22,6 +22,63 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 #include "../Utilities/offer.h"
 #include <stack>
 
+// lizhiang 2018/05/14
+void Print(BinaryTreeNode *pRoot)
+{
+    if (pRoot == NULL)
+        return;
+
+    BinaryTreeNode *node = NULL;
+    int now = 1;
+    int next = 0;
+    int cur = 0;
+    std::stack<BinaryTreeNode *> st[2];
+    st[cur].push(pRoot);
+
+    while (st[0].size() > 0 || st[1].size() > 0)
+    {
+        node = st[cur].top();
+        printf("%d ", node->m_nValue);
+
+        if (cur == 0)
+        {
+            if (node->m_pLeft != NULL)
+            {
+                st[1 - cur].push(node->m_pLeft);
+                next++;
+            }
+            if (node->m_pRight != NULL)
+            {
+                st[1 - cur].push(node->m_pRight);
+                next++;
+            }
+        }
+        else
+        {
+            if (node->m_pRight != NULL)
+            {
+                st[1 - cur].push(node->m_pRight);
+                next++;
+            }
+            if (node->m_pLeft != NULL)
+            {
+                st[1 - cur].push(node->m_pLeft);
+                next++;
+            }
+        }
+
+        st[cur].pop();
+        now--;
+        if (now == 0)
+        {
+            printf("\n");
+            now = next;
+            cur = 1 - cur;
+            next = 0;
+        }
+    }
+}
+
 void Print_org(BinaryTreeNode* pRoot)
 {
     if(pRoot == nullptr)
@@ -57,13 +114,13 @@ void Print_org(BinaryTreeNode* pRoot)
         if(levels[current].empty())
         {
             printf("\n");
-            current = 1 - current;
+            current = 1 - current; // good taste to just bool
             next = 1 - next;
         }
     }
 }
 
-void Print(BinaryTreeNode* pRoot)
+void Print_1(BinaryTreeNode* pRoot)
 {
   if (pRoot == NULL)
     return;
