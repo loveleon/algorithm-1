@@ -48,13 +48,37 @@ public:
     }
 };
 
+//Author: lizhiang
+class Solution3 {
+public:
+  vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
+  {
+    std::set<int> s1;
+    std::set<int> s2;
 
+    std::vector<int> vr;
 
+    int i = 0;
+    for (i = 0; i < nums1.size(); i++)
+    {
+      s1.insert(nums1[i]);
+    }
 
+    for (i = 0; i < nums2.size(); i++)
+    {
+      if (s1.find(nums2[i]) != s1.end())
+      {
+        s2.insert(nums2[i]);
+      }
+    }    
 
+    std::set<int>::iterator it;
+    for (it = s2.begin(); it != s2.end(); it++)
+    {
+      vr.push_back(*it);
+    }
 
-
-
-
-
+    return vr;
+  }
+};
 
