@@ -18,8 +18,45 @@ https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 
 #include <cstdio>
 #include "../Utilities/List.h"
-
+//lizhiang 2018/04/30
 void DeleteNode(ListNode** pListHead, ListNode* pToBeDeleted)
+{
+    ListNode *node = NULL;
+    
+    if (pToBeDeleted == NULL || *pListHead == NULL)
+        return;
+
+    if (pToBeDeleted->m_pNext != NULL)
+    {
+        ListNode *next = pToBeDeleted->m_pNext;
+        pToBeDeleted->m_nValue = next->m_nValue;
+        pToBeDeleted->m_pNext = next->m_pNext;
+        
+        next->m_pNext = NULL;
+        delete next;
+        next = NULL;
+    }
+    else if (*pListHead == pToBeDeleted)
+    {
+        delete pToBeDeleted;
+        pToBeDeleted = NULL;
+        *pListHead = NULL;
+    }
+    else
+    {
+        ListNode *node = *pListHead;
+        while (node->m_pNext != pToBeDeleted)
+        {
+            node = node->m_pNext;
+        }
+       
+        node->m_pNext = NULL;
+        delete pToBeDeleted;
+        pToBeDeleted = NULL;
+    }
+}
+
+void DeleteNode_1(ListNode** pListHead, ListNode* pToBeDeleted)
 {
     if(!pListHead || !pToBeDeleted)
         return;
@@ -69,6 +106,7 @@ void Test(ListNode* pListHead, ListNode* pNode)
     
     printf("The result list is: \n");
     PrintList(pListHead);
+    printf("\n");
 }
 
 // 链表中有多个结点，删除中间的结点
